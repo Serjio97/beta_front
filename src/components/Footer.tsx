@@ -15,7 +15,7 @@ const Footer = () => {
     setSubmitting(true);
 
     try {
-      const res = await fetch('http://betawaves_back:3100/api/contact-messages', {
+      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/contact-messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

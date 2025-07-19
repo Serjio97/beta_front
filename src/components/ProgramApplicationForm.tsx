@@ -29,7 +29,7 @@ const ProgramApplicationForm = ({ isOpen, onClose, program }: ProgramApplication
   e.preventDefault();
 
   try {
-   const response = await fetch('http://betawaves_back:3100/api/program-applications', {
+   const response = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/program-applications', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

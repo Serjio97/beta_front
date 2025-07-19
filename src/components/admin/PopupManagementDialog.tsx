@@ -76,7 +76,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
       form.append('existingImage', formData.image); // required by backend
     }
 
-    await fetch('http://betawaves_back:3100/api/popup/update', {
+    await fetch('https://betawaves-back.4bzwio.easypanel.host/api/popup/update', {
       method: 'POST',
       body: form,
     });

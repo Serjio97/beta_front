@@ -31,7 +31,7 @@ const Contact = () => {
   setIsSubmitting(true);
 
   try {
-    const response = await fetch('http://betawaves_back:3100/api/contact-messages', {
+    const response = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/contact-messages', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

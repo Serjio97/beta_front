@@ -1108,7 +1108,7 @@ export const CMSService = {
     }
   });
 
-  await fetch('http://betawaves_back:3100/api/popup/update', { 
+  await fetch('https://betawaves-back.4bzwio.easypanel.host/api/popup/update', { 
     method: 'POST',
     body: data
   });

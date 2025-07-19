@@ -40,7 +40,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const fetchAdmins = async () => {
     try {
-      const res = await fetch('http://betawaves_back:3100/api/admins');  
+      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/admins');  
       const data = await res.json();
       setAdmins(data);
     } catch (error) {
@@ -50,7 +50,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
-      const res = await fetch('http://betawaves_back:3100/api/admins/login', {
+      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/admins/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -78,7 +78,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const createAdmin = async (username: string, email: string, password: string): Promise<boolean> => {
     try {
-      const res = await fetch('http://betawaves_back:3100/api/admins', {
+      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/admins', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password }),
@@ -95,7 +95,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const deleteAdmin = async (id: string): Promise<boolean> => {
     if (id === currentAdmin?.id) return false;
     try {
-        const res = await fetch(`http://betawaves_back:3100/api/admins/${id}`, {
+        const res = await fetch(`https://betawaves-back.4bzwio.easypanel.host/api/admins/${id}`, {
         method: 'DELETE',
       });
       if (!res.ok) return false;

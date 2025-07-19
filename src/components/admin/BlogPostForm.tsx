@@ -63,7 +63,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     form.append('image', imageFile);
 
     try {
-      const res = await fetch('http://betawaves_back:3100/api/uploads/blog-image', {
+      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/uploads/blog-image', {
         method: 'POST',
         body: form,
       });

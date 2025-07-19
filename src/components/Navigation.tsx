@@ -58,14 +58,14 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-              <Button asChild variant="outline" size="sm" className="ml-4">
+              {/* <Button asChild variant="outline" size="sm" className="ml-4">
     <Link to={isAdminLoggedIn ? "/admin/dashboard" : "/admin"}>
       <div className="flex items-center space-x-2">
         <Settings size={16} />
         <span>Admin</span>
       </div>
     </Link>
-  </Button>
+  </Button> */}
             <Button asChild className="ml-2">
               <Link to="/contact">Contact</Link>
             </Button>

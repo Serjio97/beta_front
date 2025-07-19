@@ -68,7 +68,7 @@ if (imageFile) {
   form.append('image', imageFile); // ✅ this is the File object
 
   try {
-    const res = await fetch('http://localhost:3000/api/uploads/team-image', {
+    const res = await fetch('http://betawaves_back:3100/api/uploads/team-image', {
   method: 'POST',
   body: form,
     });

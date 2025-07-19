@@ -44,7 +44,7 @@ const [formData, setFormData] = useState({
 
 useEffect(() => {
   if (isOpen) {
-    fetch('http://localhost:3000/api/collaborators')
+    fetch('http://betawaves_back:3100/api/collaborators')
       .then((res) => res.json())
       .then((data) => {
         setFormData((prev) => ({ ...prev, collaborators: data }));
@@ -52,7 +52,7 @@ useEffect(() => {
       .catch((err) => {
         console.error('Failed to load collaborators:', err);
       });
-    fetch('http://localhost:3000/api/running-text')
+    fetch('http://betawaves_back:3100/api/running-text') 
       .then((res) => res.json())
       .then((companies) => {
         setFormData((prev) => ({
@@ -60,7 +60,7 @@ useEffect(() => {
           companiesText: companies.join('\n')
         }));
       });
-    fetch('http://localhost:3000/api/style-settings')
+    fetch('http://betawaves_back:3100/api/style-settings')
   .then((res) => res.json())
   .then((data) => {
     setFormData((prev) => ({
@@ -85,7 +85,7 @@ useEffect(() => {
     uploadForm.append('image', imageFile);
 
     try {
-      const res = await fetch('http://localhost:3000/api/uploads/style-hero-image', {
+      const res = await fetch('http://betawaves_back:3100/api/uploads/style-hero-image', {
         method: 'POST',
         body: uploadForm
       });
@@ -103,7 +103,7 @@ useEffect(() => {
     }
   }
 try {
-  await fetch('http://localhost:3000/api/style-settings', {
+  await fetch('http://betawaves_back:3100/api/style-settings', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ try {
 }
 // Update running text companies
 try {
-  await fetch('http://localhost:3000/api/running-text', {
+  await fetch('http://betawaves_back:3100/api/running-text', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -136,7 +136,7 @@ try {
   // Save collaborators
   for (const collab of formData.collaborators) {
     try {
-      const endpoint = `http://localhost:3000/api/collaborators${collab.id ? `/${collab.id}` : ''}`;
+      const endpoint = `http://betawaves_back:3100/api/collaborators${collab.id ? `/${collab.id}` : ''}`;
       const method = collab.id ? 'PUT' : 'POST';
 
 
@@ -196,7 +196,7 @@ const removeCollaborator = async (index: number) => {
   // If it exists in DB → delete from backend
   if (toDelete.id) {
     try {
-      await fetch(`http://localhost:3000/api/collaborators/${toDelete.id}`, {
+        await fetch(`http://betawaves_back:3100/api/collaborators/${toDelete.id}`, {
         method: 'DELETE',
       });
     } catch (err) {

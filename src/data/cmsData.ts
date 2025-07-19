@@ -1108,7 +1108,7 @@ export const CMSService = {
     }
   });
 
-  await fetch('http://localhost:3000/api/popup/update', {
+  await fetch('http://betawaves_back:3100/api/popup/update', { 
     method: 'POST',
     body: data
   });

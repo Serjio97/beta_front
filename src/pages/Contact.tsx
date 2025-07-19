@@ -31,7 +31,7 @@ const Contact = () => {
   setIsSubmitting(true);
 
   try {
-    const response = await fetch('http://localhost:3000/api/contact-messages', {
+    const response = await fetch('http://betawaves_back:3100/api/contact-messages', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

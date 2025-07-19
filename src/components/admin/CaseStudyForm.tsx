@@ -74,7 +74,7 @@ tags: caseStudy.tags.join(', '),
     form.append('image', imageFile);
 
     try {
-      const res = await fetch('http://localhost:3000/api/uploads/case-study-image', {
+      const res = await fetch('http://betawaves_back:3100/api/uploads/case-study-image', {
         method: 'POST',
         body: form,
       });

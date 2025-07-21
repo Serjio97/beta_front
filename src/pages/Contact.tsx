@@ -82,14 +82,8 @@ const Contact = () => {
       <section className="bg-gradient-to-r from-primary/10 via-blue-50 to-primary/5 py-20">
         <div className="container-width section-padding">
           <div className="max-w-4xl mx-auto text-center">
-            <Button variant="outline" size="sm" className="mb-6" asChild>
-              <Link to="/" className="flex items-center space-x-2">
-                <ArrowLeft size={16} />
-                Back to Home
-              </Link>
-            </Button>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              <span className="block">Get In  <span className="gradient-text">Touch+</span></span>
+              <span className="block">Get In  <span className="gradient-text">Touch</span></span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-4">
              Ready to transform your startup idea into reality? 
@@ -133,8 +127,8 @@ const Contact = () => {
                     <div>
                       <span className="font-medium">General Inquiries:</span>
                       <br />
-                      <a href="mailto:all@betawaves.com" className="text-primary hover:underline">
-                        all@betawaves.com
+                      <a href="mailto:hello@betawaves.io" className="text-primary hover:underline">
+                        hello@betawaves.io
                       </a>
                     </div>
                     {/* <div>

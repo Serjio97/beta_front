@@ -233,10 +233,10 @@ const Contact = () => {
                         className="mt-1 w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                       >
                         <option value="">Select a program</option>
-                        <option value="incubation">Products</option>
-                        <option value="acceleration">Innovation Consulting</option>
-                        <option value="bootcamp">Investment</option>
-                        <option value="cxo-academy">Other</option>
+                        <option value="Products">Products</option>
+                        <option value="Innovation Consulting">Innovation Consulting</option>
+                        <option value="Investment">Investment</option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
 

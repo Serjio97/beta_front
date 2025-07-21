@@ -177,7 +177,7 @@ const Contact = () => {
                 <CardHeader>
                   <CardTitle className="text-2xl">Send us a message</CardTitle>
                   <CardDescription>
-                    Fill out the form below and we'll get back to you within 24 hours.
+                    Fill out the form below and we'll get back to you within 48 hours.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

@@ -22,9 +22,9 @@ const Home = () => {
 
 
   const [styleSettings, setStyleSettings] = useState({
-    heroType: 'image',
-    heroImage: '',
-    heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
+    heroType: '',
+    heroImage: 'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
+    heroVideoUrl:'',
     runningTextCompanies: [
       'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
       'Google Ventures', 'Microsoft Ventures', 'Amazon Web Services', 'Salesforce Ventures'

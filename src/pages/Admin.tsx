@@ -740,7 +740,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             {/* <TabsTrigger value="applications">Applications</TabsTrigger> */}
           </TabsList>
 
-          <TabsContent value="services" className="mt-6">
+          {/* <TabsContent value="services" className="mt-6">
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -792,6 +792,21 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
+          </TabsContent> */}
+
+          <TabsContent value="messages" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Contact Messages</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {renderMessagesGrid()}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="admins">
+            <AdminManagement />
           </TabsContent>
 
           <TabsContent value="consulting" className="mt-6">
@@ -1198,20 +1213,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="messages" className="mt-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Contact Messages</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {renderMessagesGrid()}
-              </CardContent>
-            </Card>
-          </TabsContent>
 
-          <TabsContent value="admins">
-            <AdminManagement />
-          </TabsContent>
         </Tabs>
       </div>
 

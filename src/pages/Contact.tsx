@@ -123,10 +123,10 @@ const Contact = () => {
                       <span className="font-medium">General Inquiries:</span>
                       <br />
                       <a href="mailto:hello@betawaves.com" className="text-primary hover:underline">
-                        hello@betawaves.com
+                        all@betawaves.com
                       </a>
                     </div>
-                    <div>
+                    {/* <div>
                       <span className="font-medium">Program Applications:</span>
                       <br />
                       <a href="mailto:apply@betawaves.com" className="text-primary hover:underline">
@@ -139,7 +139,7 @@ const Contact = () => {
                       <a href="mailto:partners@betawaves.com" className="text-primary hover:underline">
                         partners@betawaves.com
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                 </Card>
 

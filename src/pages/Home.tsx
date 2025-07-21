@@ -414,9 +414,9 @@ const Home = () => {
                           {feature}
                         </li>)}
                     </ul>
-                    <div className="space-y-2 text-sm">
+                    {/* <div className="space-y-2 text-sm">
                       <div><strong>Duration : </strong> {consulting.eligibility}</div>
-                    </div>
+                    </div> */}
                   </CardContent>
                 </Card>;
           })}
@@ -453,9 +453,9 @@ const Home = () => {
       <CardDescription className="text-base text-gray-300">{product.description}</CardDescription>
     </CardHeader>
     <CardContent>
-      <div className="mb-6 text-sm text-gray-400">
+      {/* <div className="mb-6 text-sm text-gray-400">
         <strong>Price:</strong> {product.price}
-      </div>
+      </div> */}
       <ul className="space-y-2 text-sm text-gray-300">
         {product.features.slice(0, 3).map((feature, idx) => (
           <li key={idx} className="flex items-center">
@@ -512,14 +512,13 @@ const Home = () => {
                   </span>
                 </CardTitle>
                 <CardDescription className="text-2xl text-white/95 mb-6 font-medium">
-                  BetaVentures, the investment arm of Betawaves, 
-                  invests in early-stage startups using technology to tackle climate and environmental challenges.
-
+               
                 </CardDescription>
                 <p className="text-lg text-white/85 max-w-4xl mx-auto leading-relaxed">
-                  We support bold founders building real-world solutions that drive sustainability,
-                  resilience, and green growth across the MENA+ region.
-
+                BetaVentures, the investment arm of Betawaves, 
+                invests in early-stage startups using technology to tackle climate and environmental challenges.
+                We support bold founders building real-world solutions that drive sustainability,
+                resilience, and green growth across the MENA+ region.
                 </p>
               </CardHeader>
               

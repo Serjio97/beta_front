@@ -22,7 +22,7 @@ const Home = () => {
 
 
   const [styleSettings, setStyleSettings] = useState({
-    heroType: '',
+    heroType: 'video',
     heroImage: '',
     heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
     runningTextCompanies: [

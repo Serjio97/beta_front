@@ -57,15 +57,15 @@ const AdminStats = ({ services, teamMembers, products, funds, messages, caseStud
         </CardContent>
       </Card>
       
-      <Card>
+      {/* <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm text-gray-600">Investment</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-primary">{funds.length}</div>
-          <p className="text-sm text-gray-600">Investment</p>
+          <p className="text-sm text-gray-600">Investment </p>
         </CardContent>
-      </Card>
+      </Card> */}
    
 
       <Card>

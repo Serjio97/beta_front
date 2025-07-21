@@ -23,8 +23,8 @@ const Home = () => {
 
   const [styleSettings, setStyleSettings] = useState({
     heroType: '',
-    heroImage: 'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
-    heroVideoUrl:'',
+    //heroImage: '',
+    heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
     runningTextCompanies: [
       'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
       'Google Ventures', 'Microsoft Ventures', 'Amazon Web Services', 'Salesforce Ventures'
@@ -252,7 +252,7 @@ const Home = () => {
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary">12</div>
-                  <div className="text-sm text-gray-600">Startups from scratch</div>
+                  <div className="text-sm text-gray-600">Startups Built</div>
                 </div>
               </div>
             </div>
@@ -269,11 +269,11 @@ const Home = () => {
       />
     </div>
   ) : (
-    <img
-      src={styleSettings.heroImage}
-      alt="Hero"
-      className="w-full h-72 object-cover"
-    />
+    // <img
+    //   src={styleSettings.heroImage}
+    //   alt="Hero"
+    //   className="w-full h-72 object-cover"
+    // />
   )}
 
   <div className="p-6 bg-white">

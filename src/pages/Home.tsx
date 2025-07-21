@@ -32,7 +32,7 @@ const Home = () => {
   useEffect(() => {
     const fetchStyleSettings = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/style-settings');
+        const res = await fetch('http://localhost:3100/api/style-settings');
         const data = await res.json();
         setStyleSettings({
           heroType: data.hero_type || 'image',

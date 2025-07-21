@@ -23,7 +23,7 @@ const Home = () => {
 
   const [styleSettings, setStyleSettings] = useState({
     heroType: '',
-    //heroImage: '',
+    heroImage: '',
     heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
     runningTextCompanies: [
       'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
@@ -268,13 +268,15 @@ const Home = () => {
         allowFullScreen
       />
     </div>
-  ) : (
-    // <img
-    //   src={styleSettings.heroImage}
-    //   alt="Hero"
-    //   className="w-full h-72 object-cover"
-    // />
-  )}
+  ) 
+  :(
+    <img
+      src={styleSettings.heroImage}
+      alt="Hero"
+      className="w-full h-72 object-cover"
+    />
+  )
+  }
 
   <div className="p-6 bg-white">
     <h3 className="font-semibold text-gray-900 text-lg">Innovation in Action</h3>

@@ -23,52 +23,52 @@ const Home = () => {
 
   const [styleSettings, setStyleSettings] = useState({
     heroType: 'image',
-    heroImage: '',
-    heroVideoUrl: '',
-    runningTextCompanies: [],
-    collaborators: [],
+    heroImage: '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
+    heroVideoUrl:'',
+    runningTextCompanies: [
+      'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
+      'Google Ventures', 'Microsoft Ventures', 'Amazon Web Services', 'Salesforce Ventures'
+    ],
+    collaborators: [
+  {
+    id: '1',
+    name: 'Microsoft',
+    logo: 'https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo.png',
+    website: 'https://microsoft.com'
+  },
+  {
+    id: '2',
+    name: 'Google Cloud',
+    logo: 'https://logos-world.net/wp-content/uploads/2021/02/Google-Cloud-Logo.png',
+    website: 'https://cloud.google.com'
+  }
+]
   });
 
   useEffect(() => {
-    const fetchStyleSettings = async () => {
-      try {
-        const res = await fetch('http://localhost:3000/api/style-settings');
-        const data = await res.json();
-        setStyleSettings({
-          heroType: data.hero_type || 'image',
-          heroImage: data.hero_image || '',
-          heroVideoUrl: data.hero_video_url || '',
-          runningTextCompanies: data.running_text_companies || [],
-          collaborators: data.collaborators || [],
-        });
-      } catch (error) {
-        // fallback to localStorage if fetch fails
-        const savedSettings = localStorage.getItem('styleSettings');
-        if (savedSettings) {
-          setStyleSettings(JSON.parse(savedSettings));
-        }
-        console.error('Error fetching style settings:', error);
-      }
-    };
-
-    fetchStyleSettings();
+    // Load style settings from localStorage
+    const savedSettings = localStorage.getItem('styleSettings');
+    if (savedSettings) {
+      setStyleSettings(JSON.parse(savedSettings));
+    }
 
     const fetchData = async () => {
       try {
-        const [servicesData, caseStudiesData, productsData, popupData, consultingData] = await Promise.all([
+        const [servicesData, caseStudiesData, productsData,popupData,consultingData] = await Promise.all([
           CMSService.getServices(),
           CMSService.getCaseStudies(),
           CMSService.getProducts(),
           CMSService.getPopup(),
           CMSService.getConsulting(),
         ]);
-        setServices(servicesData.slice(0, 3));
+        setServices(servicesData.slice(0, 3)); // Featured services
         setConsulting(consultingData.slice(0, 3));
-        setCaseStudies(caseStudiesData.slice(0, 2));
+        setCaseStudies(caseStudiesData.slice(0, 2)); // Featured case studies
         setProducts(productsData.slice(0, 3));
-        if (popupData?.isActive) {
-          setShowPopup(true);
-        }
+
+         if (popupData?.isActive) {
+        setShowPopup(true); // ✅ show popup if active
+      }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -113,7 +113,7 @@ const Home = () => {
               <p className="text-xl  text-gray-600 mb-8 leading-relaxed">
                We provide innovation services, early-stage investment, and ecosystem support across the region. 
                From building startup programs and advising corporates and governments to co-creating ventures, 
-               we help ideas grow and markets connect.
+               we help ideas grow and markets connect.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
@@ -385,7 +385,7 @@ const Home = () => {
                 <div className="mb-6">
                   <div className="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-sm font-medium mb-4">
                     <Zap className="h-4 w-4 mr-2" />
-                    Betaventures Fund I
+                    Impact Investment Fund
                   </div>
                 </div>
                 <CardTitle className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
@@ -395,16 +395,16 @@ const Home = () => {
 
                   </span>
                 </CardTitle>
-                <CardDescription>
-                <p className="text-lg text-white/85 max-w-4xl mx-auto leading-relaxed">
-                  BetaVentures, the investment arm of Betawaves,invests in early-stage startups using technology to tackle climate and environmental challenges.
-                </p>
+                <CardDescription className="text-2xl text-white/95 mb-6 font-medium">
+                  BetaVentures, the investment arm of Betawaves, 
+                  invests in early-stage startups using technology to tackle climate and environmental challenges.
+
+                </CardDescription>
                 <p className="text-lg text-white/85 max-w-4xl mx-auto leading-relaxed">
                   We support bold founders building real-world solutions that drive sustainability,
                   resilience, and green growth across the MENA+ region.
+
                 </p>
-                </CardDescription>
-                
               </CardHeader>
               
               <CardContent>

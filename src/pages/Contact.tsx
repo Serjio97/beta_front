@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, DollarSign, MapPin, Users, Leaf, Zap, Droplets, Truck, Factory, Recycle, Link } from 'lucide-react';
+import { ArrowLeft, Link } from 'lucide-react';
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -78,20 +79,23 @@ const Contact = () => {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <section className="bg-gradient-to-r from-primary/10 to-blue-50 py-20">
+      <section className="bg-gradient-to-r from-primary/10 via-blue-50 to-primary/5 py-20">
         <div className="container-width section-padding">
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
             <Button variant="outline" size="sm" className="mb-6" asChild>
               <Link to="/" className="flex items-center space-x-2">
                 <ArrowLeft size={16} />
                 <span>Back to Home</span>
               </Link>
             </Button>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Get In <span className="gradient-text">Touch</span>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              <span className="block">Get In  <span className="gradient-text">Touch+</span></span>
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Ready to transform your startup idea into reality? Let's discuss how Betawaves can support your entrepreneurial journey.
+            <p className="text-xl text-gray-600 leading-relaxed mb-4">
+             Ready to transform your startup idea into reality? 
+            </p>
+            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+             Let's discuss how Betawaves can support your entrepreneurial journey.
             </p>
           </div>
         </div>

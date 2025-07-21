@@ -276,6 +276,9 @@ Betaventures aims for at least 40% of its portfolio to be made up of startups fo
                 <a href="https://betaventuresfund1.decilehub.com/pacts?pid=9nGqvjKm&dgrid=08c2c772-f426-4763-a30a-6ad9d7279dd3" target="_blank" rel="noopener noreferrer">Invest With Us</a>
                 </Button>
               </CardContent>
+               <Button asChild variant="secondary" size="lg" className="bg-white/20 backdrop-blur border-white/30 text-white hover:bg-white hover:text-primary font-semibold rounded-xl">
+                <a href="https://betaventuresfund1.decilehub.com/" target="_blank" rel="noopener noreferrer">Learn More About Betaventures</a>
+              </Button>
             </Card>
           </div>
         </div>

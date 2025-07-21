@@ -26,8 +26,8 @@ const Home = () => {
     heroImage: '',
     heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
     runningTextCompanies: [
-      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Markets', 'Emerging-Tech', 'Ventuer-Studio', 'Ecosystem-Building', 
-      'Worldwide-Connections'
+      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Ventuer-Studio', 'Ecosystem-Building', 
+      'Worldwide-Connections', 'Emerging-Markets'
     ],
     collaborators: [
   {

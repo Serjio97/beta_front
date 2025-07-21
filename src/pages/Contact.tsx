@@ -29,52 +29,63 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  try {
-    const response = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/contact-messages', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    name: formData.name,
-    email: formData.email,
-    subject: formData.program || formData.company || 'General Inquiry',
-    message: formData.message,
-    timestamp: new Date(),
-    status: 'unread'
-  }),
-});
+    const companyEmailPattern = /^[a-zA-Z0-9._%+-]+@(?!gmail\.com$|yahoo\.com$|hotmail\.com$|outlook\.com$|icloud\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!response.ok) throw new Error('Failed to send message');
+    if (!companyEmailPattern.test(formData.email)) {
+      toast({
+        title: 'Invalid Email',
+        description: 'Please use your company email address (no Gmail, Yahoo, Outlook, etc.)',
+        variant: 'destructive',
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
-    toast({
-      title: "Message sent successfully!",
-      description: "We'll get back to you within 24 hours.",
-    });
+    try {
+      const response = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/contact-messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.program || formData.company || 'General Inquiry',
+          message: formData.message,
+          timestamp: new Date(),
+          status: 'unread'
+        }),
+      });
 
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      program: '',
-      message: ''
-    });
-  } catch (error) {
-    console.error('Submission error:', error);
-    toast({
-      title: 'Submission failed',
-      description: 'There was a problem sending your message.',
-      variant: 'destructive',
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send message');
+      }
 
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you within 24 hours.",
+      });
 
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        program: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast({
+        title: 'Submission failed',
+        description: (error as Error).message || 'There was a problem sending your message.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -83,20 +94,20 @@ const Contact = () => {
         <div className="container-width section-padding">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              <span className="block">Get In  <span className="gradient-text">Touch</span></span>
+              <span className="block">Get In <span className="gradient-text">Touch</span></span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-4">
-             Ready to transform your startup idea into reality? 
+              Ready to transform your startup idea into reality?
             </p>
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-             Let's discuss how Betawaves can support your entrepreneurial journey.
+              Let's discuss how Betawaves can support your entrepreneurial journey.
             </p>
           </div>
         </div>
       </section>
 
       {/* Contact Form and Info */}
-      <section className="py-20"> 
+      <section className="py-20">
         <div className="container-width section-padding">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
            
@@ -129,10 +140,10 @@ const Contact = () => {
                         hello@betawaves.io
                       </a>
                     </div>
-                     <div>
+                    <div>
                       <span className="font-medium">Phone:</span>
                       <br />
-                      <a href="+971 58 829 0773" className="text-primary hover:underline">
+                      <a className="text-primary hover:underline">
                         +971 58 829 0773
                       </a>
                     </div>
@@ -160,7 +171,7 @@ const Contact = () => {
            
             </div>
 
- {/* Contact Form */}
+            {/* Contact Form */}
             <div>
               <Card>
                 <CardHeader>
@@ -174,7 +185,7 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="name">Full Name *</Label>
-                        <Input 
+                        <Input
                           id="name"
                           name="name"
                           value={formData.name}
@@ -185,7 +196,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <Label htmlFor="email">Email Address *</Label>
-                        <Input 
+                        <Input
                           id="email"
                           name="email"
                           type="email"
@@ -193,13 +204,15 @@ const Contact = () => {
                           onChange={handleInputChange}
                           required
                           className="mt-1"
+                          pattern="^[a-zA-Z0-9._%+-]+@(?!gmail\.com$|yahoo\.com$|hotmail\.com$|outlook\.com$|icloud\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                          title="Please use your company email address (e.g., no Gmail, Yahoo, or Hotmail)"
                         />
                       </div>
                     </div>
 
                     <div>
                       <Label htmlFor="company">Company/Startup Name</Label>
-                      <Input 
+                      <Input
                         id="company"
                         name="company"
                         value={formData.company}
@@ -227,7 +240,7 @@ const Contact = () => {
 
                     <div>
                       <Label htmlFor="message">Message *</Label>
-                      <Textarea 
+                      <Textarea
                         id="message"
                         name="message"
                         value={formData.message}
@@ -239,9 +252,9 @@ const Contact = () => {
                       />
                     </div>
 
-                    <Button 
-                      type="submit" 
-                      className="w-full" 
+                    <Button
+                      type="submit"
+                      className="w-full"
                       size="lg"
                       disabled={isSubmitting}
                     >

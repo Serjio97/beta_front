@@ -26,8 +26,8 @@ const Home = () => {
     heroImage: '',
     heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
     runningTextCompanies: [
-      'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
-      'Google Ventures', 'Microsoft Ventures', 'Amazon Web Services', 'Salesforce Ventures'
+      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Markets', 'Emerging-Tech', 'Ventuer-Studio', 'Ecosystem-Building', 
+      'Worldwide-Connections'
     ],
     collaborators: [
   {
@@ -620,7 +620,7 @@ const Home = () => {
 
           <div className="text-center mt-12">
             <Button asChild>
-              <Link to="/case-studies">View All Case Studies</Link>
+              <Link to="/case-studies">View All Portfolio</Link>
             </Button>
           </div>
         </div>

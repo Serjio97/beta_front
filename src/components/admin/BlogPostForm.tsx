@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { BlogPost } from '@/data/cmsData';
 
+
 interface BlogPostFormProps {
   isOpen: boolean;
   onClose: () => void;

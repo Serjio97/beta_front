@@ -24,51 +24,51 @@ const Home = () => {
   const [styleSettings, setStyleSettings] = useState({
     heroType: 'image',
     heroImage: '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
-    heroVideoUrl:'',
-    runningTextCompanies: [
-      'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
-      'Google Ventures', 'Microsoft Ventures', 'Amazon Web Services', 'Salesforce Ventures'
-    ],
-    collaborators: [
-  {
-    id: '1',
-    name: 'Microsoft',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo.png',
-    website: 'https://microsoft.com'
-  },
-  {
-    id: '2',
-    name: 'Google Cloud',
-    logo: 'https://logos-world.net/wp-content/uploads/2021/02/Google-Cloud-Logo.png',
-    website: 'https://cloud.google.com'
-  }
-]
+    heroVideoUrl: '',
+    runningTextCompanies: [],
+    collaborators: [],
   });
 
   useEffect(() => {
-    // Load style settings from localStorage
-    const savedSettings = localStorage.getItem('styleSettings');
-    if (savedSettings) {
-      setStyleSettings(JSON.parse(savedSettings));
-    }
+    const fetchStyleSettings = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/style-settings');
+        const data = await res.json();
+        setStyleSettings({
+          heroType: data.hero_type || 'image',
+          heroImage: data.hero_image || '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
+          heroVideoUrl: data.hero_video_url || '',
+          runningTextCompanies: data.running_text_companies || [],
+          collaborators: data.collaborators || [],
+        });
+      } catch (error) {
+        // fallback to localStorage if fetch fails
+        const savedSettings = localStorage.getItem('styleSettings');
+        if (savedSettings) {
+          setStyleSettings(JSON.parse(savedSettings));
+        }
+        console.error('Error fetching style settings:', error);
+      }
+    };
+
+    fetchStyleSettings();
 
     const fetchData = async () => {
       try {
-        const [servicesData, caseStudiesData, productsData,popupData,consultingData] = await Promise.all([
+        const [servicesData, caseStudiesData, productsData, popupData, consultingData] = await Promise.all([
           CMSService.getServices(),
           CMSService.getCaseStudies(),
           CMSService.getProducts(),
           CMSService.getPopup(),
           CMSService.getConsulting(),
         ]);
-        setServices(servicesData.slice(0, 3)); // Featured services
+        setServices(servicesData.slice(0, 3));
         setConsulting(consultingData.slice(0, 3));
-        setCaseStudies(caseStudiesData.slice(0, 2)); // Featured case studies
+        setCaseStudies(caseStudiesData.slice(0, 2));
         setProducts(productsData.slice(0, 3));
-
-         if (popupData?.isActive) {
-        setShowPopup(true); // ✅ show popup if active
-      }
+        if (popupData?.isActive) {
+          setShowPopup(true);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {

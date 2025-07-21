@@ -113,7 +113,7 @@ const Home = () => {
               <p className="text-xl  text-gray-600 mb-8 leading-relaxed">
                We provide innovation services, early-stage investment, and ecosystem support across the region. 
                From building startup programs and advising corporates and governments to co-creating ventures, 
-               we help ideas grow and markets connect.
+               we help ideas grow and markets connect.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
@@ -385,7 +385,7 @@ const Home = () => {
                 <div className="mb-6">
                   <div className="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-sm font-medium mb-4">
                     <Zap className="h-4 w-4 mr-2" />
-                    Impact Investment Fund
+                    Betaventures Fund I
                   </div>
                 </div>
                 <CardTitle className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
@@ -395,16 +395,16 @@ const Home = () => {
 
                   </span>
                 </CardTitle>
-                <CardDescription className="text-2xl text-white/95 mb-6 font-medium">
-                  BetaVentures, the investment arm of Betawaves, 
-                  invests in early-stage startups using technology to tackle climate and environmental challenges.
-
-                </CardDescription>
+                <CardDescription>
+                <p className="text-lg text-white/85 max-w-4xl mx-auto leading-relaxed">
+                  BetaVentures, the investment arm of Betawaves,invests in early-stage startups using technology to tackle climate and environmental challenges.
+                </p>
                 <p className="text-lg text-white/85 max-w-4xl mx-auto leading-relaxed">
                   We support bold founders building real-world solutions that drive sustainability,
                   resilience, and green growth across the MENA+ region.
-
                 </p>
+                </CardDescription>
+                
               </CardHeader>
               
               <CardContent>

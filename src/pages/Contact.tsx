@@ -111,8 +111,6 @@ const Contact = () => {
                     <div>
                       <h4 className="font-medium">UAE, Dubai</h4>
                       <p className="text-gray-600 text-sm">
-                        Email: hello@betawaves.io<br/>
-                        Phone: +971 58 829 0773<br/>
                         Address: Level 1 Gate Avenue - South Zone, Dubai International Financial Centre, United Arab Emirates
                       </p>
                     </div>
@@ -129,6 +127,13 @@ const Contact = () => {
                       <br />
                       <a href="mailto:hello@betawaves.io" className="text-primary hover:underline">
                         hello@betawaves.io
+                      </a>
+                    </div>
+                     <div>
+                      <span className="font-medium">Phone:</span>
+                      <br />
+                      <a href="+971 58 829 0773" className="text-primary hover:underline">
+                        +971 58 829 0773
                       </a>
                     </div>
                     {/* <div>

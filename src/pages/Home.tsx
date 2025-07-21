@@ -28,7 +28,8 @@ const Home = () => {
     runningTextCompanies: [
       'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
       'Google Ventures', 'Microsoft Ventures', 'Amazon Web Services', 'Salesforce Ventures'
-    ]
+    ],
+    collaborators: [ ]
   });
 
   useEffect(() => {

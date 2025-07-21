@@ -22,8 +22,8 @@ const Home = () => {
 
 
   const [styleSettings, setStyleSettings] = useState({
-    heroType: '',
-    heroImage: '',
+    heroType: 'image',
+    heroImage: '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
     heroVideoUrl: '',
     runningTextCompanies: [],
     collaborators: [],
@@ -35,8 +35,8 @@ const Home = () => {
         const res = await fetch('http://localhost:3100/api/style-settings');
         const data = await res.json();
         setStyleSettings({
-          heroType: data.hero_type || '',
-          heroImage: data.hero_image || '',
+          heroType: data.hero_type || 'image',
+          heroImage: data.hero_image || '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
           heroVideoUrl: data.hero_video_url || '',
           runningTextCompanies: data.running_text_companies || [],
           collaborators: data.collaborators || [],

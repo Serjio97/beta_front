@@ -277,9 +277,11 @@ Betaventures aims for at least 40% of its portfolio to be made up of startups fo
                 </Button>
               </CardContent>
             </Card>
+              <div className="text-center mt-12">
               <Button asChild variant="secondary" size="lg" className="bg-white/20 backdrop-blur border-white/30 text-white hover:bg-white hover:text-primary font-semibold rounded-xl">
                 <a href="https://betaventuresfund1.decilehub.com/" target="_blank" rel="noopener noreferrer">Learn More About Betaventures</a>
               </Button>
+            </div>
 
           </div>
         </div>

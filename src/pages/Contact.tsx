@@ -195,7 +195,7 @@ const Contact = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="email">Email Address *</Label>
+                        <Label htmlFor="email">Company Email Address *</Label>
                         <Input
                           id="email"
                           name="email"
@@ -211,10 +211,11 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="company">Company/Startup Name</Label>
+                      <Label htmlFor="company">Company Name *</Label>
                       <Input
                         id="company"
                         name="company"
+                        required
                         value={formData.company}
                         onChange={handleInputChange}
                         className="mt-1"
@@ -222,19 +223,20 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="program">Interest</Label>
+                      <Label htmlFor="program">Interest *</Label>
                       <select
                         id="program"
                         name="program"
+                        required
                         value={formData.program}
                         onChange={handleInputChange}
                         className="mt-1 w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
                       >
                         <option value="">Select a program</option>
                         <option value="incubation">Products</option>
-                        <option value="acceleration">Consulting</option>
+                        <option value="acceleration">Innovation Consulting</option>
                         <option value="bootcamp">Investment</option>
-                        <option value="cxo-academy">Programs</option>
+                        <option value="cxo-academy">Other</option>
                       </select>
                     </div>
 

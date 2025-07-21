@@ -23,26 +23,12 @@ const Home = () => {
 
   const [styleSettings, setStyleSettings] = useState({
     heroType: 'image',
-    heroImage: '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
-    heroVideoUrl:'',
+    heroImage: '',
+    heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
     runningTextCompanies: [
       'TechStars', 'Y Combinator', 'Sequoia Capital', 'Andreessen Horowitz', 
       'Google Ventures', 'Microsoft Ventures', 'Amazon Web Services', 'Salesforce Ventures'
-    ],
-    collaborators: [
-  {
-    id: '1',
-    name: 'Microsoft',
-    logo: 'https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo.png',
-    website: 'https://microsoft.com'
-  },
-  {
-    id: '2',
-    name: 'Google Cloud',
-    logo: 'https://logos-world.net/wp-content/uploads/2021/02/Google-Cloud-Logo.png',
-    website: 'https://cloud.google.com'
-  }
-]
+    ]
   });
 
   useEffect(() => {

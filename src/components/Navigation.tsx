@@ -103,14 +103,14 @@ const Navigation = () => {
                   {item.name}
                 </Link>
               ))}
-              <Link
+              {/* <Link
   to={isAdminLoggedIn ? "/admin/dashboard" : "/admin"}
   className="flex items-center space-x-2 text-sm font-medium px-2 py-1 rounded transition-colors text-gray-600 hover:text-primary hover:bg-gray-50"
   onClick={() => setIsMenuOpen(false)}
 >
   <Settings size={16} />
   <span>Admin</span>
-</Link>
+</Link> */}
 
               <Button asChild className="mt-4 w-fit">
                 <Link to="/contact" onClick={() => setIsMenuOpen(false)}>

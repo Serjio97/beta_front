@@ -152,7 +152,7 @@ const Home = () => {
   },
   {
     id: '21',
-    name: 'GitexNG',
+    name: 'Gitex',
     logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH5MTbHcGnfFOqRrlHTA0e7fktBnhboTBroA&s',
     website: 'https://www.gitexnigeria.ng/'
   }
@@ -176,7 +176,7 @@ const Home = () => {
           CMSService.getConsulting(),
         ]);
         setServices(servicesData.slice(0, 3)); // Featured services
-        setConsulting(consultingData.slitce(0, 3));
+        setConsulting(consultingData.slice(0, 3));
         setCaseStudies(caseStudiesData.slice(0, 2)); // Featured case studies
         setProducts(productsData.slice(0, 3));
 

@@ -65,7 +65,7 @@ const Contact = () => {
 
       toast({
         title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
+        description: "We'll get back to you within 48 hours.",
       });
 
       setFormData({
@@ -79,7 +79,7 @@ const Contact = () => {
       console.error('Submission error:', error);
       toast({
         title: 'Submission failed',
-        description: (error as Error).message || 'There was a problem sending your message.',
+        description: (error as Error).message || 'There was a problem sending your message. Please use your company email address (no Gmail, Yahoo, Outlook, etc.',
         variant: 'destructive',
       });
     } finally {
@@ -97,10 +97,10 @@ const Contact = () => {
               <span className="block">Get In <span className="gradient-text">Touch</span></span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-4">
-              Ready to transform your startup idea into reality?
+              Ready to transform your ideas into reality?
             </p>
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Let's discuss how Betawaves can support your entrepreneurial journey.
+              Let's discuss how Betawaves can support you in your journey.
             </p>
           </div>
         </div>

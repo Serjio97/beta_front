@@ -32,11 +32,11 @@ const Home = () => {
   useEffect(() => {
     const fetchStyleSettings = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/style-settings');
+        const res = await fetch('http://localhost:3100/api/style-settings');
         const data = await res.json();
         setStyleSettings({
-          heroType: data.hero_type || 'image',
-          heroImage: data.hero_image || '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
+          heroType: data.hero_type || '',
+          heroImage: data.hero_image || '',
           heroVideoUrl: data.hero_video_url || '',
           runningTextCompanies: data.running_text_companies || [],
           collaborators: data.collaborators || [],

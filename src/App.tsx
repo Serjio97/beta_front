@@ -22,6 +22,7 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "@/components/AdminLogin"; // at the top
 import ScrollToTop from "@/ScrollToTop"; // at the top
+import ProtectedRoute from '@/components/ProtectedRoute'; // Add this import at the top
 
 import CookieConsent from "@/components/CookieConsent";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -54,7 +55,11 @@ const App = () => (
                 <Route path="/events" element={<Events />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/admin" element={<AdminLogin />} />
-                <Route path="/admin/dashboard" element={<Admin />} />
+                <Route path="/admin/dashboard" element={
+                  <ProtectedRoute>
+                    <Admin />
+                  </ProtectedRoute>
+                } />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms-of-service" element={<TermsOfService />} />
                 <Route path="/cookie-policy" element={<CookiePolicy />} />

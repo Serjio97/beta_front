@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { ArrowLeft, DollarSign, MapPin, Users, Leaf, Zap, Droplets, Truck, Factory, Recycle, Link } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -80,6 +81,12 @@ const Contact = () => {
       <section className="bg-gradient-to-r from-primary/10 to-blue-50 py-20">
         <div className="container-width section-padding">
           <div className="text-center max-w-3xl mx-auto">
+            <Button variant="outline" size="sm" className="mb-6" asChild>
+              <Link to="/" className="flex items-center space-x-2">
+                <ArrowLeft size={16} />
+                <span>Back to Home</span>
+              </Link>
+            </Button>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Get In <span className="gradient-text">Touch</span>
             </h1>
@@ -101,14 +108,14 @@ const Contact = () => {
               {/* Contact Cards */}
               <div className="space-y-6">
                 <Card className="p-6">
-                  <h3 className="text-lg font-semibold mb-4">Office Locations</h3>
+                  <h3 className="text-lg font-semibold mb-4">Our Locations</h3>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-medium">Level 1 Gate Avenue</h4>
+                      <h4 className="font-medium">UAE, Dubai</h4>
                       <p className="text-gray-600 text-sm">
-                        South Zone, Dubai International Financial Centre<br />
-                        United Arab Emirates<br />
-                        +971 58 829 0773
+                        Email: hello@betawaves.io<br/>
+                        Phone: +971 58 829 0773<br/>
+                        Address: Level 1 Gate Avenue - South Zone, Dubai International Financial Centre, United Arab Emirates
                       </p>
                     </div>
                     <div>
@@ -122,7 +129,7 @@ const Contact = () => {
                     <div>
                       <span className="font-medium">General Inquiries:</span>
                       <br />
-                      <a href="mailto:hello@betawaves.com" className="text-primary hover:underline">
+                      <a href="mailto:all@betawaves.com" className="text-primary hover:underline">
                         all@betawaves.com
                       </a>
                     </div>

@@ -22,8 +22,8 @@ const Home = () => {
 
 
   const [styleSettings, setStyleSettings] = useState({
-    heroType: 'image',
-    heroImage: '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg',
+    heroType: '',
+    heroImage: '',
     heroVideoUrl: '',
     runningTextCompanies: [],
     collaborators: [],

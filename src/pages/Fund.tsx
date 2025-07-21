@@ -70,9 +70,8 @@ const Fund = () => {
             </Button>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Powering the Future of Sustainability 
-              <span className="block">and Climate Tech</span>
-               
-              <span className="block">Across  <span className="gradient-text">MENA+</span></span>
+              <span className="block">and Climate Tech Across</span>
+              <span className="gradient-text">MENA+</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-4">
              BetaVentures, the investment arm of Betawaves, invests in early-stage startups using technology to tackle climate and environmental challenges.

@@ -85,7 +85,7 @@ const Contact = () => {
             <Button variant="outline" size="sm" className="mb-6" asChild>
               <Link to="/" className="flex items-center space-x-2">
                 <ArrowLeft size={16} />
-                <span>Back to Home</span>
+                Back to Home
               </Link>
             </Button>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">

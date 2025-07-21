@@ -54,10 +54,10 @@ const Footer = () => {
               alt="Betawaves Logo" 
               className="w-30 h-10 object-contain" 
             />
-
            
           </Link>
 
+            <br></br>
             <p className="text-gray-400 mb-4 max-w-md">
               We provide innovation services, early-stage investment, and ecosystem support across the region.
               From building startup programs and advising corporates and governments to co-creating ventures,

@@ -50,10 +50,10 @@ const Footer = () => {
            {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
            <img 
-  src="/lovable-uploads/H-Betawaves-Logo-White.png" 
-  alt="Betawaves Logo" 
-  className="w-30 h-10 object-contain" 
-/>
+              src="/lovable-uploads/H-Betawaves-Logo-White.png" 
+              alt="Betawaves Logo" 
+              className="w-30 h-10 object-contain" 
+            />
 
            
           </Link>
@@ -81,19 +81,18 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Programs */}
-          <div className="container-width section-padding text-center">
-          <h2 className="text-3xl md:text-2xl font-semibold mb-4">
-            Stay Updated
-          </h2>
-          <p className="text-1xl mb-8  opacity-50 max-w-2xl mx-auto">
+          {/* Newsletter */}
+        <div className="container-width section-padding text-center">
+          <h2 className="text-3xl md:text-2xl font-semibold mb-4">Stay Updated</h2>
+          <p className="text-1xl mb-8 opacity-50 max-w-2xl mx-auto">
             Subscribe to our newsletter and get the latest startup insights delivered to your inbox.
           </p>
-          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+
+          <form onSubmit={handleSubscribe} className="flex flex-col gap-4 max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+              className="px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -106,6 +105,7 @@ const Footer = () => {
               {submitting ? 'Subscribing...' : 'Subscribe'}
             </button>
           </form>
+
           {success && <p className="text-green-400 mt-2">Subscribed successfully!</p>}
         </div>
         </div>

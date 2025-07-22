@@ -1067,6 +1067,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                           By {blogPost.author}
                         </span>
                       </div>
+                      <span className="text-xs text-gray-400 block mb-1">{new Date(blogPost.publishDate).toLocaleDateString()}</span>
                       <p className="text-gray-700">{blogPost.excerpt}</p>
                       <div className="text-xs text-gray-600">
                         Published: {new Date(blogPost.publishDate).toLocaleDateString()}

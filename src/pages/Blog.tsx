@@ -167,6 +167,7 @@ const Blog = () => {
                     <CardTitle className="text-2xl md:text-3xl mb-4">
                       {filteredPosts[0].title}
                     </CardTitle>
+                    <span className="text-xs text-gray-400 block mb-2">{formatDate(filteredPosts[0].publishDate)}</span>
                     <CardDescription className="text-base">
                       {filteredPosts[0].excerpt}
                     </CardDescription>
@@ -241,6 +242,7 @@ const Blog = () => {
                   <CardTitle className="text-lg leading-tight mb-2">
                     {post.title}
                   </CardTitle>
+                  <span className="text-xs text-gray-400 block mb-2">{formatDate(post.publishDate)}</span>
                   <CardDescription className="text-sm line-clamp-3">
                     {post.excerpt}
                   </CardDescription>

@@ -18,15 +18,16 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
     title: '',
     subject: '',
     description: '',
-    image: '', // image URL
+    image: '',
     link: '',
     isActive: true,
   });
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (open) fetchPopup();
+    if (open) {
+      fetchPopup();
+    }
   }, [open]);
 
   const fetchPopup = async () => {
@@ -48,24 +49,26 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
     }
   };
 
+  const handleChange = (field: keyof typeof formData, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const payload = {
-        title: formData.title,
-        subject: formData.subject,
-        description: formData.description,
-        image: formData.image, // now a URL string
-        link: formData.link,
-        isActive: formData.isActive,
-      };
-
       await fetch('https://betawaves-back.4bzwio.easypanel.host/api/popup/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          title: formData.title,
+          subject: formData.subject,
+          description: formData.description,
+          link: formData.link,
+          isActive: formData.isActive,
+          existingImage: formData.image,
+        }),
       });
 
       onOpenChange(false);
@@ -74,10 +77,6 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleChange = (field: keyof typeof formData, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -94,6 +93,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="title"
               value={formData.title}
               onChange={(e) => handleChange('title', e.target.value)}
+              placeholder="Enter popup title"
               required
             />
           </div>
@@ -104,6 +104,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="subject"
               value={formData.subject}
               onChange={(e) => handleChange('subject', e.target.value)}
+              placeholder="Enter popup subject"
               required
             />
           </div>
@@ -114,25 +115,27 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="description"
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
+              placeholder="Enter popup description"
               rows={4}
               required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="imageUrl">Image URL</Label>
+            <Label htmlFor="image">Image URL</Label>
             <Input
-              id="imageUrl"
+              id="image"
+              type="url"
               value={formData.image}
               onChange={(e) => handleChange('image', e.target.value)}
-              placeholder="https://example.com/image.png"
+              placeholder="https://example.com/image.jpg"
               required
             />
             {formData.image && (
               <img
                 src={formData.image}
-                alt="Preview"
-                className="w-full h-40 object-cover rounded-md mt-2"
+                alt="Popup preview"
+                className="w-full h-40 object-cover rounded-md"
               />
             )}
           </div>
@@ -143,6 +146,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="link"
               value={formData.link}
               onChange={(e) => handleChange('link', e.target.value)}
+              placeholder="Enter destination URL"
               required
             />
           </div>

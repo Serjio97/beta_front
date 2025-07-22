@@ -129,9 +129,7 @@ const [imagePreview, setImagePreview] = useState<string>('');
               <Button type="button" variant="outline" onClick={() => editor?.chain().focus().setFontSize('16px').run()} disabled={!editor}>16px</Button>
               <Button type="button" variant="outline" onClick={() => editor?.chain().focus().setFontSize('20px').run()} disabled={!editor}>20px</Button>
             </div>
-            <div className="border rounded min-h-[120px] p-2 bg-white">
-              <EditorContent editor={editor} />
-            </div>
+            
           </div>
           
           <div className="grid grid-cols-2 gap-4">

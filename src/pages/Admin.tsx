@@ -315,10 +315,10 @@ const deleteConsultingMutation = useMutation({
     mutationFn: (data: Omit<Fund, 'id'>) => apiService.post('/funds', transformFundToDB(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['funds'] });
-      toast({ title: 'Fund created successfully' });
+      toast({ title: 'Investment post created successfully' });
     },
     onError: () => {
-      toast({ title: 'Failed to create fund', variant: 'destructive' });
+      toast({ title: 'Failed to create investment post', variant: 'destructive' });
     }
   });
 
@@ -327,10 +327,10 @@ const deleteConsultingMutation = useMutation({
       apiService.put(`/funds/${id}`, transformFundToDB(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['funds'] });
-      toast({ title: 'Fund updated successfully' });
+      toast({ title: 'Investment post updated successfully' });
     },
     onError: () => {
-      toast({ title: 'Failed to update fund', variant: 'destructive' });
+      toast({ title: 'Failed to update investment post', variant: 'destructive' });
     }
   });
 
@@ -338,10 +338,10 @@ const deleteConsultingMutation = useMutation({
     mutationFn: (id: string) => apiService.delete(`/funds/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['funds'] });
-      toast({ title: 'Fund deleted successfully' });
+      toast({ title: 'Investment post deleted successfully' });
     },
     onError: () => {
-      toast({ title: 'Failed to delete fund', variant: 'destructive' });
+      toast({ title: 'Failed to delete investment post', variant: 'destructive' });
     }
   });
 
@@ -350,10 +350,10 @@ const deleteConsultingMutation = useMutation({
     mutationFn: (data: Omit<CaseStudy, 'id'>) => apiService.post('/case-studies', transformCaseStudyToDB(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['case-studies'] });
-      toast({ title: 'Case study created successfully' });
+      toast({ title: 'Portfolio post created successfully' });
     },
     onError: () => {
-      toast({ title: 'Failed to create case study', variant: 'destructive' });
+      toast({ title: 'Failed to create portfolio post', variant: 'destructive' });
     }
   });
 
@@ -362,10 +362,10 @@ const deleteConsultingMutation = useMutation({
       apiService.put(`/case-studies/${id}`, transformCaseStudyToDB(data)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['case-studies'] });
-      toast({ title: 'Case study updated successfully' });
+      toast({ title: 'Portfolio post updated successfully' });
     },
     onError: () => {
-      toast({ title: 'Failed to update case study', variant: 'destructive' });
+      toast({ title: 'Failed to update portfolio post', variant: 'destructive' });
     }
   });
 
@@ -373,10 +373,10 @@ const deleteConsultingMutation = useMutation({
     mutationFn: (id: string) => apiService.delete(`/case-studies/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['case-studies'] });
-      toast({ title: 'Case study deleted successfully' });
+      toast({ title: 'Portfolio post deleted successfully' });
     },
     onError: () => {
-      toast({ title: 'Failed to delete case study', variant: 'destructive' });
+      toast({ title: 'Failed to delete portfoilio post', variant: 'destructive' });
     }
   });
 
@@ -517,17 +517,6 @@ const deleteConsultingMutation = useMutation({
     },
     onError: () => {
       toast({ title: 'Failed to delete team member', variant: 'destructive' });
-    }
-  });
-
-  const deleteContactMessageMutation = useMutation({
-    mutationFn: (id: string) => apiService.delete(`/contact-messages/${id}`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contact-messages'] });
-      toast({ title: 'Message deleted successfully' });
-    },
-    onError: () => {
-      toast({ title: 'Failed to delete message', variant: 'destructive' });
     }
   });
 
@@ -686,19 +675,6 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
               <span className="text-xs text-gray-500">
                 {new Date(message.timestamp).toLocaleDateString()}
               </span>
-              <Button
-                variant="outline"
-                size="sm"
-                className="text-red-600 hover:text-red-700 ml-2"
-                onClick={() => {
-                  if (window.confirm('Are you sure you want to delete this message?')) {
-                    deleteContactMessageMutation.mutate(message.id);
-                  }
-                }}
-              >
-                <Trash2 className="w-4 h-4 mr-1" />
-                Delete
-              </Button>
             </div>
           </CardContent>
         </Card>
@@ -750,21 +726,21 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
         
         <Tabs defaultValue="services" className="mt-9">
           <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9">
-            <TabsTrigger value="services">Programs</TabsTrigger>
+            <TabsTrigger value="messages">Messages</TabsTrigger>
+            <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
+            {/* <TabsTrigger value="services">Programs</TabsTrigger> */}
             <TabsTrigger value="consulting">Consultings</TabsTrigger>
             <TabsTrigger value="products">Products</TabsTrigger>
             {/* <TabsTrigger value="funds">Funds</TabsTrigger> */}
             <TabsTrigger value="case-studies">Portfolio</TabsTrigger>
-            <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
             {/* <TabsTrigger value="events">Events</TabsTrigger> */}
             <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="team">Team</TabsTrigger>
-            <TabsTrigger value="messages">Messages</TabsTrigger>
             <TabsTrigger value="admins">Admins</TabsTrigger>
             {/* <TabsTrigger value="applications">Applications</TabsTrigger> */}
           </TabsList>
 
-          <TabsContent value="services" className="mt-6">
+          {/* <TabsContent value="services" className="mt-6">
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -816,6 +792,21 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
+          </TabsContent> */}
+
+          <TabsContent value="messages" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Contact Messages</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {renderMessagesGrid()}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="admins">
+            <AdminManagement />
           </TabsContent>
 
           <TabsContent value="consulting" className="mt-6">
@@ -934,7 +925,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                   <CardTitle>Funds Management</CardTitle>
                   <Button onClick={() => setIsFundFormOpen(true)}>
                     <Plus className="w-4 h-4 mr-2" />
-                    Add Fund
+                    Add Investment
                   </Button>
                 </div>
               </CardHeader>
@@ -1222,20 +1213,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="messages" className="mt-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Contact Messages</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {renderMessagesGrid()}
-              </CardContent>
-            </Card>
-          </TabsContent>
 
-          <TabsContent value="admins">
-            <AdminManagement />
-          </TabsContent>
         </Tabs>
       </div>
 

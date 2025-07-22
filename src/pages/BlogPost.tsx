@@ -5,14 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Calendar, User, Clock, Share2 } from 'lucide-react';
 import { CMSService, BlogPost as BlogPostType } from '@/data/cmsData';
-import { useToast } from '@/hooks/use-toast';
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
   const [blogPost, setBlogPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
   const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
-  const { toast } = useToast();
 
   useEffect(() => {
     const fetchBlogPost = async () => {
@@ -51,63 +49,6 @@ const BlogPost = () => {
     const words = content.split(' ').length;
     const minutes = Math.ceil(words / wordsPerMinute);
     return `${minutes} min read`;
-    };
-
-  const handleShare = async () => {
-    const currentUrl = window.location.href;
-    const shareData = {
-      title: blogPost?.title || 'Blog Post',
-      text: blogPost?.excerpt || '',
-      url: currentUrl,
-    };
-
-    // Check if native Web Share API is supported
-    if (navigator.share && /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      try {
-        await navigator.share(shareData);
-        toast({
-          title: "Shared successfully",
-          description: "The blog post has been shared!",
-        });
-      } catch (error) {
-        // User cancelled or sharing failed, fallback to clipboard
-        handleCopyLink(currentUrl);
-      }
-    } else {
-      // Fallback to copying link to clipboard
-      handleCopyLink(currentUrl);
-    }
-  };
-
-  const handleCopyLink = async (url: string) => {
-    try {
-      await navigator.clipboard.writeText(url);
-      toast({
-        title: "Link copied!",
-        description: "Blog post link has been copied to clipboard.",
-      });
-    } catch (error) {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = url;
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      try {
-        document.execCommand('copy');
-        toast({
-          title: "Link copied!",
-          description: "Blog post link has been copied to clipboard.",
-        });
-      } catch (fallbackError) {
-        toast({
-          title: "Share failed",
-          description: "Unable to copy link. Please copy the URL manually.",
-          variant: "destructive",
-        });
-      }
-      document.body.removeChild(textArea);
-    }
   };
 
   if (loading) {
@@ -185,7 +126,7 @@ const BlogPost = () => {
                 </div>
               </div>
               
-                <Button variant="outline" size="sm" className="ml-auto" onClick={handleShare}>
+              <Button variant="outline" size="sm" className="ml-auto">
                 <Share2 className="h-4 w-4 mr-2" />
                 Share
               </Button>
@@ -215,9 +156,9 @@ const BlogPost = () => {
           <div className="max-w-4xl mx-auto">
             <div className="prose prose-lg max-w-none">
               <div className="text-gray-700 leading-relaxed space-y-6">
-                 <p>
-                    {blogPost.content}
-                </p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: blogPost.content }}
+                />
                 {/* <p>
                   The startup funding landscape is evolving rapidly, driven by technological innovations, changing investor preferences, and global economic shifts. As we move through 2024, entrepreneurs and investors alike are witnessing unprecedented changes in how startups secure funding and scale their operations.
                 </p>

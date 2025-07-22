@@ -2,11 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import { BlogPost } from '@/data/cmsData';
-
+// @ts-ignore
+const ReactQuill = require('react-quill') as any;
+import { Suspense } from 'react';
+import 'react-quill/dist/quill.snow.css';
 
 interface BlogPostFormProps {
   isOpen: boolean;
@@ -107,13 +110,14 @@ const [imagePreview, setImagePreview] = useState<string>('');
           
           <div>
             <Label htmlFor="content">Content</Label>
-            <Textarea
-              id="content"
-              value={formData.content}
-              onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-              rows={10}
-              required
-            />
+            <div className="bg-white border rounded">
+              {React.createElement(ReactQuill as any, {
+                theme: 'snow',
+                value: formData.content,
+                onChange: (value: string) => setFormData(prev => ({ ...prev, content: value })),
+                style: { minHeight: 200 },
+              })}
+            </div>
           </div>
           
           <div className="grid grid-cols-2 gap-4">

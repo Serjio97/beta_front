@@ -118,9 +118,8 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
 
           <div>
             <Label htmlFor="content">Content</Label>
-            {/* Toolbar */}
-            
-             <div className="space-y-2">
+            {/* Tiptap Toolbar */}
+            <div className="space-y-2">
                       <Label htmlFor="content">Content *</Label>
                       <EmailEditor
                         value={formData.content}
@@ -128,12 +127,12 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
                         minHeight="250px"
                       />
                     </div>
-           
-            {/* Editor */}
-            <div className="border rounded p-2 min-h-[200px]">
+            <div className="border rounded min-h-[120px] p-2 bg-white">
               <EditorContent editor={editor} />
             </div>
           </div>
+           
+            
           
           <div className="grid grid-cols-2 gap-4">
             <div>

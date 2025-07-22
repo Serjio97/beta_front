@@ -14,28 +14,19 @@ interface PopupManagementDialogProps {
 
 const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProps) => {
   const [popup, setPopup] = useState<Popup | null>(null);
-  const [formData, setFormData] = useState<{
-  title: string;
-  subject: string;
-  description: string;
-  image: File | string;
-  link: string;
-  isActive: boolean;
-}>({
-  title: '',
-  subject: '',
-  description: '',
-  image: '',
-  link: '',
-  isActive: true
-});
+  const [formData, setFormData] = useState({
+    title: '',
+    subject: '',
+    description: '',
+    image: '', // image URL
+    link: '',
+    isActive: true,
+  });
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (open) {
-      fetchPopup();
-    }
+    if (open) fetchPopup();
   }, [open]);
 
   const fetchPopup = async () => {
@@ -49,7 +40,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
           description: popupData.description,
           image: popupData.image,
           link: popupData.link,
-          isActive: popupData.isActive
+          isActive: popupData.isActive,
         });
       }
     } catch (error) {
@@ -58,43 +49,36 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const form = new FormData();
-    form.append('title', formData.title || '');
-    form.append('subject', formData.subject || '');
-    form.append('description', formData.description || '');
-    form.append('link', formData.link || '');
-    form.append('isActive', String(formData.isActive));
+    try {
+      const payload = {
+        title: formData.title,
+        subject: formData.subject,
+        description: formData.description,
+        image: formData.image, // now a URL string
+        link: formData.link,
+        isActive: formData.isActive,
+      };
 
-    // 👇 handle file or fallback to existing image
-    if (formData.image instanceof File) {
-      form.append('image', formData.image);
-    } else if (typeof formData.image === 'string') {
-      form.append('existingImage', formData.image); // required by backend
+      await fetch('https://betawaves-back.4bzwio.easypanel.host/api/popup/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      onOpenChange(false);
+    } catch (err) {
+      console.error('Popup update failed', err);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    await fetch('https://betawaves-back.4bzwio.easypanel.host/api/popup/update', {
-      method: 'POST',
-      body: form,
-    });
-
-    onOpenChange(false);
-  } catch (err) {
-    console.error('Popup update failed', err);
-  } finally {
-    setLoading(false);
-  }
-};
-
-
-
-  const handleChange = (field: keyof typeof formData, value: string | boolean | File) => {
-  setFormData(prev => ({ ...prev, [field]: value }));
-};
-
+  const handleChange = (field: keyof typeof formData, value: string | boolean) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -102,7 +86,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
         <DialogHeader>
           <DialogTitle>Manage Welcome Popup</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
@@ -110,7 +94,6 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="title"
               value={formData.title}
               onChange={(e) => handleChange('title', e.target.value)}
-              placeholder="Enter popup title"
               required
             />
           </div>
@@ -121,7 +104,6 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="subject"
               value={formData.subject}
               onChange={(e) => handleChange('subject', e.target.value)}
-              placeholder="Enter popup subject"
               required
             />
           </div>
@@ -132,29 +114,27 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="description"
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
-              placeholder="Enter popup description"
               rows={4}
               required
             />
           </div>
 
           <div className="space-y-2">
-           <Label htmlFor="image">Image</Label>
-<Input
-  id="image"
-  type="file"
-  accept="image/*"
-  onChange={(e) => handleChange('image', e.target.files?.[0] || '')}
-/>
-{typeof formData.image === 'string' && formData.image && (
-  <img
-    src={formData.image}
-    alt="Popup preview"
-    className="w-full h-40 object-cover rounded-md"
-  />
-)}
-
-
+            <Label htmlFor="imageUrl">Image URL</Label>
+            <Input
+              id="imageUrl"
+              value={formData.image}
+              onChange={(e) => handleChange('image', e.target.value)}
+              placeholder="https://example.com/image.png"
+              required
+            />
+            {formData.image && (
+              <img
+                src={formData.image}
+                alt="Preview"
+                className="w-full h-40 object-cover rounded-md mt-2"
+              />
+            )}
           </div>
 
           <div className="space-y-2">
@@ -163,7 +143,6 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
               id="link"
               value={formData.link}
               onChange={(e) => handleChange('link', e.target.value)}
-              placeholder="Enter destination URL"
               required
             />
           </div>

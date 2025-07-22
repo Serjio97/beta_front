@@ -1,10 +1,10 @@
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import { BlogPost } from '@/data/cmsData';
 
 interface BlogPostFormProps {
@@ -56,31 +56,6 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
-  let imageUrl = formData.image;
-
-  if (imageFile) {
-    const form = new FormData();
-    form.append('image', imageFile);
-
-    try {
-      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/uploads/blog-image', {
-        method: 'POST',
-        body: form,
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Upload failed: ${text}`);
-      }
-
-      const data = await res.json();
-      imageUrl = data.url;
-    } catch (error) {
-      console.error('Image upload failed:', error);
-      return;
-    }
-  }
-
   const formattedTags = formData.tags
     .split(',')
     .map(tag => tag.trim())
@@ -94,13 +69,12 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     category: formData.category,
     publishDate: formData.publishDate,
     tags: formattedTags,
-    image: imageUrl
+    image: formData.image
   });
 
   onClose();
 };
 
-const [imageFile, setImageFile] = useState<File | null>(null);
 const [imagePreview, setImagePreview] = useState<string>('');
 
   return (
@@ -185,18 +159,16 @@ const [imagePreview, setImagePreview] = useState<string>('');
           </div>
           
           <div>
-  <Label htmlFor="image">Upload Image</Label>
+  <Label htmlFor="image">Image URL</Label>
   <Input
     id="image"
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setImageFile(file);
-        setImagePreview(URL.createObjectURL(file));
-      }
+    type="url"
+    value={formData.image}
+    onChange={e => {
+      setFormData(prev => ({ ...prev, image: e.target.value }));
+      setImagePreview(e.target.value);
     }}
+    placeholder="https://example.com/image.jpg"
     required={!blogPost}
   />
   {imagePreview && (

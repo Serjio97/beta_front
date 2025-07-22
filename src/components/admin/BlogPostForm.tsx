@@ -31,6 +31,11 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
   const [imagePreview, setImagePreview] = useState<string>('');
 
   useEffect(() => {
+    // Dynamically load Quill's CSS only on client
+    import('react-quill/dist/quill.snow.css');
+  }, []);
+
+  useEffect(() => {
     if (blogPost) {
       setFormData({
         title: blogPost.title,

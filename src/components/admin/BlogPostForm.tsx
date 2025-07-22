@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -29,6 +28,8 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     tags: '',
     image: ''
   });
+
+  const [imagePreview, setImagePreview] = useState<string>('');
 
   useEffect(() => {
     if (blogPost) {
@@ -65,29 +66,27 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     },
   });
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const formattedTags = formData.tags
-    .split(',')
-    .map(tag => tag.trim())
-    .filter(tag => tag);
+    const formattedTags = formData.tags
+      .split(',')
+      .map(tag => tag.trim())
+      .filter(tag => tag);
 
-  onSubmit({
-    title: formData.title,
-    excerpt: formData.excerpt,
-    content: formData.content,
-    author: formData.author,
-    category: formData.category,
-    publishDate: formData.publishDate,
-    tags: formattedTags,
-    image: formData.image
-  });
+    onSubmit({
+      title: formData.title,
+      excerpt: formData.excerpt,
+      content: formData.content,
+      author: formData.author,
+      category: formData.category,
+      publishDate: formData.publishDate,
+      tags: formattedTags,
+      image: formData.image
+    });
 
-  onClose();
-};
-
-const [imagePreview, setImagePreview] = useState<string>('');
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -115,21 +114,31 @@ const [imagePreview, setImagePreview] = useState<string>('');
               required
             />
           </div>
-          
+
           <div>
             <Label htmlFor="content">Content</Label>
-            {/* Tiptap Toolbar */}
-            <div className="flex gap-2 mb-2">
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().toggleBold().run()} disabled={!editor}>Bold</Button>
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().toggleItalic().run()} disabled={!editor}>Italic</Button>
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().setColor('#F87171').run()} disabled={!editor}>Red</Button>
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().setColor('#2563EB').run()} disabled={!editor}>Blue</Button>
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().setColor('#16A34A').run()} disabled={!editor}>Green</Button>
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().unsetColor().run()} disabled={!editor}>Reset Color</Button>
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().setFontSize('16px').run()} disabled={!editor}>16px</Button>
-              <Button type="button" variant="outline" onClick={() => editor?.chain().focus().setFontSize('20px').run()} disabled={!editor}>20px</Button>
-            </div>
-            <div className="border rounded min-h-[120px] p-2 bg-white">
+            {/* Toolbar */}
+            {editor && (
+              <div className="flex flex-wrap gap-2 mb-2">
+                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'bg-gray-200' : ''}>
+                  Bold
+                </Button>
+                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleItalic().run()} className={editor.isActive('italic') ? 'bg-gray-200' : ''}>
+                  Italic
+                </Button>
+                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleUnderline().run()} className={editor.isActive('underline') ? 'bg-gray-200' : ''}>
+                  Underline
+                </Button>
+                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleBulletList().run()} className={editor.isActive('bulletList') ? 'bg-gray-200' : ''}>
+                  Bullet List
+                </Button>
+                <Button type="button" variant="outline" onClick={() => editor.chain().focus().setColor('#F87171').run()}>
+                  Red
+                </Button>
+              </div>
+            )}
+            {/* Editor */}
+            <div className="border rounded p-2 min-h-[200px]">
               <EditorContent editor={editor} />
             </div>
           </div>
@@ -144,7 +153,6 @@ const [imagePreview, setImagePreview] = useState<string>('');
                 required
               />
             </div>
-            
             <div>
               <Label htmlFor="category">Category</Label>
               <Input
@@ -155,7 +163,7 @@ const [imagePreview, setImagePreview] = useState<string>('');
               />
             </div>
           </div>
-          
+
           <div>
             <Label htmlFor="publishDate">Publish Date</Label>
             <Input
@@ -166,39 +174,39 @@ const [imagePreview, setImagePreview] = useState<string>('');
               required
             />
           </div>
-          
+
           <div>
             <Label htmlFor="tags">Tags (comma-separated)</Label>
-           <Input
+            <Input
               id="tags"
               value={formData.tags}
               onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
               placeholder="e.g., startup, tech, innovation"
             />
           </div>
-          
+
           <div>
-  <Label htmlFor="image">Image URL</Label>
-  <Input
-    id="image"
-    type="url"
-    value={formData.image}
-    onChange={e => {
-      setFormData(prev => ({ ...prev, image: e.target.value }));
-      setImagePreview(e.target.value);
-    }}
-    placeholder="https://example.com/image.jpg"
-    required={!blogPost}
-  />
-  {imagePreview && (
-    <img
-      src={imagePreview}
-      alt="Preview"
-      className="w-24 h-24 object-cover rounded border mt-2"
-    />
-  )}
-</div>
-          
+            <Label htmlFor="image">Image URL</Label>
+            <Input
+              id="image"
+              type="url"
+              value={formData.image}
+              onChange={e => {
+                setFormData(prev => ({ ...prev, image: e.target.value }));
+                setImagePreview(e.target.value);
+              }}
+              placeholder="https://example.com/image.jpg"
+              required={!blogPost}
+            />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="w-24 h-24 object-cover rounded border mt-2"
+              />
+            )}
+          </div>
+
           <div className="flex gap-2 pt-4">
             <Button type="submit">{blogPost ? 'Update' : 'Add'} Blog Post</Button>
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>

@@ -1,7 +1,7 @@
 
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useEffect, useState } from "react";
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -44,7 +44,7 @@ const [formData, setFormData] = useState({
 
 useEffect(() => {
   if (isOpen) {
-    fetch('https://betawaves-back.4bzwio.easypanel.host/api/collaborators')
+    fetch('http://localhost:3000/api/collaborators')
       .then((res) => res.json())
       .then((data) => {
         setFormData((prev) => ({ ...prev, collaborators: data }));
@@ -52,7 +52,7 @@ useEffect(() => {
       .catch((err) => {
         console.error('Failed to load collaborators:', err);
       });
-    fetch('https://betawaves-back.4bzwio.easypanel.host/api/running-text') 
+    fetch('http://localhost:3000/api/running-text')
       .then((res) => res.json())
       .then((companies) => {
         setFormData((prev) => ({
@@ -60,7 +60,7 @@ useEffect(() => {
           companiesText: companies.join('\n')
         }));
       });
-    fetch('https://betawaves-back.4bzwio.easypanel.host/api/style-settings')
+    fetch('http://localhost:3000/api/style-settings')
   .then((res) => res.json())
   .then((data) => {
     setFormData((prev) => ({
@@ -80,30 +80,30 @@ useEffect(() => {
   let heroImageUrl = formData.heroImage;
 
   // Upload hero image
-  if (imageFile) {
-    const uploadForm = new FormData();
-    uploadForm.append('image', imageFile);
+  // if (imageFile) {
+  //   const uploadForm = new FormData();
+  //   uploadForm.append('image', imageFile);
 
-    try {
-      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/uploads/style-hero-image', {
-        method: 'POST',
-        body: uploadForm
-      });
+  //   try {
+  //     const res = await fetch('http://localhost:3000/api/uploads/style-hero-image', {
+  //       method: 'POST',
+  //       body: uploadForm
+  //     });
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`Upload failed: ${errorText}`);
-      }
+  //     if (!res.ok) {
+  //       const errorText = await res.text();
+  //       throw new Error(`Upload failed: ${errorText}`);
+  //     }
 
-      const data = await res.json();
-      heroImageUrl = data.url;
-    } catch (err) {
-      console.error('Hero image upload failed:', err);
-      return;
-    }
-  }
+  //     const data = await res.json();
+  //     heroImageUrl = data.url;
+  //   } catch (err) {
+  //     console.error('Hero image upload failed:', err);
+  //     return;
+  //   }
+  // }
 try {
-  await fetch('https://betawaves-back.4bzwio.easypanel.host/api/style-settings', {
+  await fetch('http://localhost:3000/api/style-settings', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ try {
 }
 // Update running text companies
 try {
-  await fetch('https://betawaves-back.4bzwio.easypanel.host/api/running-text', {
+  await fetch('http://localhost:3000/api/running-text', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -136,7 +136,7 @@ try {
   // Save collaborators
   for (const collab of formData.collaborators) {
     try {
-      const endpoint = `https://betawaves-back.4bzwio.easypanel.host/api/collaborators${collab.id ? `/${collab.id}` : ''}`;
+      const endpoint = `http://localhost:3000/api/collaborators${collab.id ? `/${collab.id}` : ''}`;
       const method = collab.id ? 'PUT' : 'POST';
 
 
@@ -196,7 +196,7 @@ const removeCollaborator = async (index: number) => {
   // If it exists in DB → delete from backend
   if (toDelete.id) {
     try {
-        await fetch(`https://betawaves-back.4bzwio.easypanel.host/api/collaborators/${toDelete.id}`, {
+      await fetch(`http://localhost:3000/api/collaborators/${toDelete.id}`, {
         method: 'DELETE',
       });
     } catch (err) {
@@ -235,18 +235,16 @@ const removeCollaborator = async (index: number) => {
 
 {formData.heroType === 'image' && (
   <div className="space-y-2">
-    <Label htmlFor="heroImage">Upload Hero Section Image</Label>
+    <Label htmlFor="heroImage">Hero Section Image URL</Label>
     <Input
       id="heroImage"
-      type="file"
-      accept="image/*"
-      onChange={(e) => {
-        const file = e.target.files?.[0];
-        if (file) {
-          setImageFile(file);
-          setImagePreview(URL.createObjectURL(file));
-        }
+      type="url"
+      value={formData.heroImage}
+      onChange={e => {
+        setFormData(prev => ({ ...prev, heroImage: e.target.value }));
+        setImagePreview(e.target.value);
       }}
+      placeholder="https://example.com/hero.jpg"
     />
     {imagePreview && (
       <img

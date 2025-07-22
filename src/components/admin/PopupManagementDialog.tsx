@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,7 +18,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
   title: string;
   subject: string;
   description: string;
-  image: File | string;
+  image: string;
   link: string;
   isActive: boolean;
 }>({
@@ -70,13 +70,11 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
     form.append('isActive', String(formData.isActive));
 
     // 👇 handle file or fallback to existing image
-    if (formData.image instanceof File) {
+    if (typeof formData.image === 'string') {
       form.append('image', formData.image);
-    } else if (typeof formData.image === 'string') {
-      form.append('existingImage', formData.image); // required by backend
     }
 
-    await fetch('https://betawaves-back.4bzwio.easypanel.host/api/popup/update', {
+    await fetch('http://localhost:3000/api/popup/update', {
       method: 'POST',
       body: form,
     });
@@ -91,7 +89,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
 
 
 
-  const handleChange = (field: keyof typeof formData, value: string | boolean | File) => {
+  const handleChange = (field: keyof typeof formData, value: string | boolean) => {
   setFormData(prev => ({ ...prev, [field]: value }));
 };
 
@@ -139,12 +137,13 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
           </div>
 
           <div className="space-y-2">
-           <Label htmlFor="image">Image</Label>
+           <Label htmlFor="image">Image URL</Label>
 <Input
   id="image"
-  type="file"
-  accept="image/*"
-  onChange={(e) => handleChange('image', e.target.files?.[0] || '')}
+  type="url"
+  value={typeof formData.image === 'string' ? formData.image : ''}
+  onChange={e => handleChange('image', e.target.value)}
+  placeholder="https://example.com/image.jpg"
 />
 {typeof formData.image === 'string' && formData.image && (
   <img

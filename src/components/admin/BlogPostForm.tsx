@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Suspense } from "react";
-import 'react-quill/dist/quill.snow.css';
+
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,8 +28,6 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     image: ''
   });
 
-  const [imagePreview, setImagePreview] = useState<string>('');
-
   useEffect(() => {
     if (blogPost) {
       setFormData({
@@ -42,7 +40,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
         tags: blogPost.tags.join(', '),
         image: blogPost.image
       });
-      setImagePreview(blogPost.image);
+      setImagePreview(blogPost.image); 
     } else {
       setFormData({
         title: '',
@@ -57,38 +55,55 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     }
   }, [blogPost, isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formattedTags = formData.tags
-      .split(',')
-      .map(tag => tag.trim())
-      .filter(tag => tag);
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    onSubmit({
-      title: formData.title,
-      excerpt: formData.excerpt,
-      content: formData.content,
-      author: formData.author,
-      category: formData.category,
-      publishDate: formData.publishDate,
-      tags: formattedTags,
-      image: formData.image
-    });
+  let imageUrl = formData.image;
 
-    onClose();
-  };
+  if (imageFile) {
+    const form = new FormData();
+    form.append('image', imageFile);
 
-  const quillModules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      ['blockquote', 'code-block'],
-      ['link', 'image'],
-      ['clean']
-    ]
-  };
+    try {
+      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/uploads/blog-image', {
+        method: 'POST',
+        body: form,
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Upload failed: ${text}`);
+      }
+
+      const data = await res.json();
+      imageUrl = data.url;
+    } catch (error) {
+      console.error('Image upload failed:', error);
+      return;
+    }
+  }
+
+  const formattedTags = formData.tags
+    .split(',')
+    .map(tag => tag.trim())
+    .filter(tag => tag);
+
+  onSubmit({
+    title: formData.title,
+    excerpt: formData.excerpt,
+    content: formData.content,
+    author: formData.author,
+    category: formData.category,
+    publishDate: formData.publishDate,
+    tags: formattedTags,
+    image: imageUrl
+  });
+
+  onClose();
+};
+
+const [imageFile, setImageFile] = useState<File | null>(null);
+const [imagePreview, setImagePreview] = useState<string>('');
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -107,41 +122,28 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
               required
             />
           </div>
-
+          
           <div>
             <Label htmlFor="excerpt">Excerpt</Label>
-            <div className="bg-white border rounded">
-              <Suspense fallback={<div>Loading editor...</div>}>
-                <ReactQuill
-                  theme="snow"
-                  value={formData.excerpt}
-                  onChange={(value: string) =>
-                    setFormData(prev => ({ ...prev, excerpt: value }))
-                  }
-                  style={{ minHeight: 100 }}
-                  modules={quillModules}
-                />
-              </Suspense>
-            </div>
+            <Textarea
+              id="excerpt"
+              value={formData.excerpt}
+              onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
+              required
+            />
           </div>
-
+          
           <div>
             <Label htmlFor="content">Content</Label>
-            <div className="bg-white border rounded">
-              <Suspense fallback={<div>Loading editor...</div>}>
-                <ReactQuill
-                  theme="snow"
-                  value={formData.content}
-                  onChange={(value: string) =>
-                    setFormData(prev => ({ ...prev, content: value }))
-                  }
-                  style={{ minHeight: 200 }}
-                  modules={quillModules}
-                />
-              </Suspense>
-            </div>
+            <Textarea
+              id="content"
+              value={formData.content}
+              onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+              rows={10}
+              required
+            />
           </div>
-
+          
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="author">Author</Label>
@@ -152,7 +154,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
                 required
               />
             </div>
-
+            
             <div>
               <Label htmlFor="category">Category</Label>
               <Input
@@ -163,7 +165,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
               />
             </div>
           </div>
-
+          
           <div>
             <Label htmlFor="publishDate">Publish Date</Label>
             <Input
@@ -174,39 +176,41 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
               required
             />
           </div>
-
+          
           <div>
             <Label htmlFor="tags">Tags (comma-separated)</Label>
-            <Input
+           <Input
               id="tags"
               value={formData.tags}
               onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
               placeholder="e.g., startup, tech, innovation"
             />
           </div>
-
+          
           <div>
-            <Label htmlFor="image">Image URL</Label>
-            <Input
-              id="image"
-              type="url"
-              value={formData.image}
-              onChange={e => {
-                setFormData(prev => ({ ...prev, image: e.target.value }));
-                setImagePreview(e.target.value);
-              }}
-              placeholder="https://example.com/image.jpg"
-              required={!blogPost}
-            />
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Preview"
-                className="w-24 h-24 object-cover rounded border mt-2"
-              />
-            )}
-          </div>
-
+  <Label htmlFor="image">Upload Image</Label>
+  <Input
+    id="image"
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setImageFile(file);
+        setImagePreview(URL.createObjectURL(file));
+      }
+    }}
+    required={!blogPost}
+  />
+  {imagePreview && (
+    <img
+      src={imagePreview}
+      alt="Preview"
+      className="w-24 h-24 object-cover rounded border mt-2"
+    />
+  )}
+</div>
+          
           <div className="flex gap-2 pt-4">
             <Button type="submit">{blogPost ? 'Update' : 'Add'} Blog Post</Button>
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>

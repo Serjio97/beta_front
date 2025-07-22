@@ -7,6 +7,12 @@ import { CMSService, BlogPost } from '@/data/cmsData';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
+// Utility to strip HTML tags and get plain text
+function getPlainTextFromHTML(html: string) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent || '';
+}
+
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
@@ -164,6 +170,19 @@ const Blog = () => {
                     <CardDescription className="text-base">
                       {filteredPosts[0].excerpt}
                     </CardDescription>
+                    {/* Blog content preview */}
+                    <p className="text-gray-500 mt-2 text-sm line-clamp-3">
+                      {
+                        (() => {
+                          const plain = getPlainTextFromHTML(filteredPosts[0].content);
+                          const words = plain.split(/\s+/).filter(Boolean);
+                          const maxWords = 30; // Adjust as needed for card size
+                          return words.length > maxWords
+                            ? words.slice(0, maxWords).join(' ') + '...'
+                            : plain;
+                        })()
+                      }
+                    </p>
                   </CardHeader>
                   
                   <CardContent className="p-0">

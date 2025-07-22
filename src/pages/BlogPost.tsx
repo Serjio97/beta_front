@@ -51,7 +51,7 @@ const BlogPost = () => {
     const words = content.split(' ').length;
     const minutes = Math.ceil(words / wordsPerMinute);
     return `${minutes} min read`;
-    };
+  };
 
   const handleShare = async () => {
     const currentUrl = window.location.href;
@@ -185,7 +185,7 @@ const BlogPost = () => {
                 </div>
               </div>
               
-                <Button variant="outline" size="sm" className="ml-auto" onClick={handleShare}>
+              <Button variant="outline" size="sm" className="ml-auto" onClick={handleShare}>
                 <Share2 className="h-4 w-4 mr-2" />
                 Share
               </Button>
@@ -214,46 +214,10 @@ const BlogPost = () => {
         <div className="container-width section-padding">
           <div className="max-w-4xl mx-auto">
             <div className="prose prose-lg max-w-none">
-              <div className="text-gray-700 leading-relaxed space-y-6">
-                 <p>
-                    {blogPost.content}
-                </p>
-                {/* <p>
-                  The startup funding landscape is evolving rapidly, driven by technological innovations, changing investor preferences, and global economic shifts. As we move through 2024, entrepreneurs and investors alike are witnessing unprecedented changes in how startups secure funding and scale their operations.
-                </p>
-                
-                <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">AI-Driven Due Diligence</h2>
-                <p>
-                  One of the most significant trends reshaping startup funding is the integration of artificial intelligence in due diligence processes. Traditional due diligence, which often took weeks or months, is now being accelerated through AI-powered analytics that can process vast amounts of data in hours.
-                </p>
-                
-                <p>
-                  Investment firms are leveraging machine learning algorithms to analyze market trends, assess competitive landscapes, and evaluate startup potential with unprecedented accuracy. This shift not only speeds up the funding process but also helps investors make more informed decisions based on data-driven insights rather than intuition alone.
-                </p>
-                
-                <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Sustainable and Impact Investing</h2>
-                <p>
-                  The rise of environmental, social, and governance (ESG) criteria in investment decisions has created a new category of funding focused on sustainable and impact-driven startups. Investors are increasingly seeking opportunities that generate both financial returns and positive societal impact.
-                </p>
-                
-                <p>
-                  This trend is particularly evident in clean technology, healthcare innovation, and social entrepreneurship sectors. Startups that can demonstrate measurable social or environmental impact alongside strong business fundamentals are finding themselves in high demand among impact investors.
-                </p>
-                
-                <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Alternative Funding Models</h2>
-                <p>
-                  Beyond traditional venture capital, alternative funding models are gaining traction. Revenue-based financing, crowdfunding, and tokenization are providing startups with more diverse funding options that align with their specific needs and growth trajectories.
-                </p>
-                
-                <p>
-                  These alternative models offer startups more flexibility and control over their equity while providing investors with different risk-return profiles. The democratization of startup funding is opening doors for entrepreneurs who might not have access to traditional venture capital networks.
-                </p>
-                
-                <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Looking Ahead</h2>
-                <p>
-                  As we progress through 2024, the startup funding ecosystem will continue to evolve. The integration of AI, focus on sustainability, and emergence of alternative funding models are just the beginning. Entrepreneurs who stay ahead of these trends and adapt their funding strategies accordingly will be best positioned for success in this dynamic landscape.
-                </p> */}
-              </div>
+              <div 
+                className="text-gray-700 leading-relaxed space-y-6"
+                dangerouslySetInnerHTML={{ __html: blogPost.content }}
+              />
             </div>
             
             {/* Tags */}

@@ -74,7 +74,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
       form.append('image', formData.image);
     }
 
-    await fetch('http://localhost:3000/api/popup/update', {
+    await fetch('http://localhost:3100/api/popup/update', {
       method: 'POST',
       body: form,
     });

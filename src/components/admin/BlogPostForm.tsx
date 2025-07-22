@@ -9,6 +9,7 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { TextStyle } from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
+import { EmailEditor } from '@/components/EmailEditor';
 
 interface BlogPostFormProps {
   isOpen: boolean;
@@ -118,25 +119,16 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
           <div>
             <Label htmlFor="content">Content</Label>
             {/* Toolbar */}
-            {editor && (
-              <div className="flex flex-wrap gap-2 mb-2">
-                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'bg-gray-200' : ''}>
-                  Bold
-                </Button>
-                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleItalic().run()} className={editor.isActive('italic') ? 'bg-gray-200' : ''}>
-                  Italic
-                </Button>
-                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleUnderline().run()} className={editor.isActive('underline') ? 'bg-gray-200' : ''}>
-                  Underline
-                </Button>
-                <Button type="button" variant="outline" onClick={() => editor.chain().focus().toggleBulletList().run()} className={editor.isActive('bulletList') ? 'bg-gray-200' : ''}>
-                  Bullet List
-                </Button>
-                <Button type="button" variant="outline" onClick={() => editor.chain().focus().setColor('#F87171').run()}>
-                  Red
-                </Button>
-              </div>
-            )}
+            
+             <div className="space-y-2">
+                      <Label htmlFor="content">Content *</Label>
+                      <EmailEditor
+                        value={formData.content}
+                        onChange={(value) => setFormData(prev => ({ ...prev, content: value }))}
+                        minHeight="250px"
+                      />
+                    </div>
+           
             {/* Editor */}
             <div className="border rounded p-2 min-h-[200px]">
               <EditorContent editor={editor} />

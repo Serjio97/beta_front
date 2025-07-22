@@ -160,15 +160,25 @@ const Home = () => {
   });
 
   useEffect(() => {
-    // Load style settings from localStorage
-    const savedSettings = localStorage.getItem('styleSettings');
-    if (savedSettings) {
-      setStyleSettings(JSON.parse(savedSettings));
-    }
+    const fetchStyleSettings = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/style-settings');
+        const data = await res.json();
+        setStyleSettings({
+          heroType: (data.hero_type === 'video' ? 'video' : 'image') as 'video' | 'image',
+          heroImage: data.hero_image,
+          heroVideoUrl: data.hero_video_url,
+          runningTextCompanies: data.running_text_companies,
+          collaborators: data.collaborators,
+        });
+      } catch (error) {
+        console.error('Error fetching style settings:', error);
+      }
+    };
 
     const fetchData = async () => {
       try {
-        const [servicesData, caseStudiesData, productsData,popupData,consultingData] = await Promise.all([
+        const [servicesData, caseStudiesData, productsData, popupData, consultingData] = await Promise.all([
           CMSService.getServices(),
           CMSService.getCaseStudies(),
           CMSService.getProducts(),
@@ -180,15 +190,17 @@ const Home = () => {
         setCaseStudies(caseStudiesData.slice(0, 2)); // Featured case studies
         setProducts(productsData.slice(0, 3));
 
-         if (popupData?.isActive) {
-        setShowPopup(true); // ✅ show popup if active
-      }
+        if (popupData?.isActive) {
+          setShowPopup(true); // ✅ show popup if active
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
+
+    fetchStyleSettings();
     fetchData();
   }, []);
 

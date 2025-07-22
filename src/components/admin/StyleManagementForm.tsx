@@ -13,13 +13,13 @@ interface Collaborator {
   logo: string;
   website: string;
 }
-interface StyleSettings {
+export type StyleSettings = {
   heroType: 'image' | 'video';
   heroImage: string; // image path (if type is image)
   heroVideoUrl: string; // YouTube URL (if type is video)
   runningTextCompanies: string[];
   collaborators: Collaborator[];
-}
+};
 
 interface StyleManagementFormProps {
   isOpen: boolean;

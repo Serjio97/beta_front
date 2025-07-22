@@ -57,15 +57,37 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     },
   });
 
+  // Only initialize formData and editor content when blogPost changes (not on every open)
   useEffect(() => {
-    if (editor && blogPost) {
-      editor.commands.setContent(blogPost.content || '');
-    }
-    if (editor && !blogPost) {
-      editor.commands.setContent('');
+    if (blogPost) {
+      setFormData({
+        title: blogPost.title,
+        excerpt: blogPost.excerpt,
+        content: blogPost.content,
+        author: blogPost.author,
+        category: blogPost.category,
+        publishDate: blogPost.publishDate,
+        tags: blogPost.tags.join(', '),
+        image: blogPost.image
+      });
+      setImagePreview(blogPost.image);
+      if (editor) editor.commands.setContent(blogPost.content || '');
+    } else {
+      setFormData({
+        title: '',
+        excerpt: '',
+        content: '',
+        author: '',
+        category: '',
+        publishDate: '',
+        tags: '',
+        image: ''
+      });
+      setImagePreview('');
+      if (editor) editor.commands.setContent('');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blogPost, isOpen, editor]);
+  }, [blogPost, editor]);
 
  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();

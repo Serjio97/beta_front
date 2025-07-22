@@ -81,7 +81,11 @@ const handleSubmit = async (e: React.FormEvent) => {
               Login
             </Button>
           </form>
-
+          <div className="mt-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-700">
+            <strong>Demo credentials:</strong><br />
+            Username: admin<br />
+            Password: admin123
+          </div>
         </CardContent>
       </Card>
     </div>

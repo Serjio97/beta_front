@@ -70,8 +70,9 @@ const Fund = () => {
             </Button>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Powering the Future of Sustainability 
-              <span className="block">and Climate Tech Across <span className="gradient-text">MENA+</span></span>
+              <span className="block">and Climate Tech</span>
                
+              <span className="block">Across  <span className="gradient-text">MENA+</span></span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed mb-4">
              BetaVentures, the investment arm of Betawaves, invests in early-stage startups using technology to tackle climate and environmental challenges.
@@ -276,13 +277,7 @@ Betaventures aims for at least 40% of its portfolio to be made up of startups fo
                 </Button>
               </CardContent>
             </Card>
-            
-            </div>
-          <div className="text-center mt-12">
-              <Button asChild variant="secondary" size="lg" className="bg-white/20 backdrop-blur border-white/30 text-white hover:bg-white hover:text-primary font-semibold rounded-xl">
-                <a href="https://betaventuresfund1.decilehub.com/" target="_blank" rel="noopener noreferrer">Learn More About Betaventures</a>
-              </Button>
-            </div>
+          </div>
         </div>
       </section>
     </div>

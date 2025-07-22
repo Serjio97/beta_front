@@ -1,5 +1,5 @@
 
-const API_BASE_URL = 'https://betawaves-back.4bzwio.easypanel.host/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://betawaves_back:3100/api';
 
 export class APIError extends Error {
   constructor(message: string, public status?: number) {

@@ -105,9 +105,9 @@ const TermsOfService = () => {
             </p>
             <div className="bg-gray-50 p-6 rounded-lg">
               <p className="text-gray-600">
-                Email: hello@betawaves.io<br/>
-                Phone: +971 58 829 0773<br/>
-                Address: Level 1 Gate Avenue - South Zone, Dubai International Financial Centre, United Arab Emirates
+                Email: legal@company.com<br/>
+                Phone: (555) 123-4567<br/>
+                Address: 123 Main Street, City, State 12345
               </p>
             </div>
           </div>

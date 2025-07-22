@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState } from "react";
-import { Input } from '@/components/ui/input';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -80,28 +80,28 @@ useEffect(() => {
   let heroImageUrl = formData.heroImage;
 
   // Upload hero image
-  // if (imageFile) {
-  //   const uploadForm = new FormData();
-  //   uploadForm.append('image', imageFile);
+  if (imageFile) {
+    const uploadForm = new FormData();
+    uploadForm.append('image', imageFile);
 
-  //   try {
-  //     const res = await fetch('http://localhost:3000/api/uploads/style-hero-image', {
-  //       method: 'POST',
-  //       body: uploadForm
-  //     });
+    try {
+      const res = await fetch('http://localhost:3000/api/uploads/style-hero-image', {
+        method: 'POST',
+        body: uploadForm
+      });
 
-  //     if (!res.ok) {
-  //       const errorText = await res.text();
-  //       throw new Error(`Upload failed: ${errorText}`);
-  //     }
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`Upload failed: ${errorText}`);
+      }
 
-  //     const data = await res.json();
-  //     heroImageUrl = data.url;
-  //   } catch (err) {
-  //     console.error('Hero image upload failed:', err);
-  //     return;
-  //   }
-  // }
+      const data = await res.json();
+      heroImageUrl = data.url;
+    } catch (err) {
+      console.error('Hero image upload failed:', err);
+      return;
+    }
+  }
 try {
   await fetch('http://localhost:3000/api/style-settings', {
     method: 'PUT',
@@ -235,16 +235,18 @@ const removeCollaborator = async (index: number) => {
 
 {formData.heroType === 'image' && (
   <div className="space-y-2">
-    <Label htmlFor="heroImage">Hero Section Image URL</Label>
+    <Label htmlFor="heroImage">Upload Hero Section Image</Label>
     <Input
       id="heroImage"
-      type="url"
-      value={formData.heroImage}
-      onChange={e => {
-        setFormData(prev => ({ ...prev, heroImage: e.target.value }));
-        setImagePreview(e.target.value);
+      type="file"
+      accept="image/*"
+      onChange={(e) => {
+        const file = e.target.files?.[0];
+        if (file) {
+          setImageFile(file);
+          setImagePreview(URL.createObjectURL(file));
+        }
       }}
-      placeholder="https://example.com/hero.jpg"
     />
     {imagePreview && (
       <img

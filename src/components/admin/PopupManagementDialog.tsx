@@ -14,14 +14,22 @@ interface PopupManagementDialogProps {
 
 const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProps) => {
   const [popup, setPopup] = useState<Popup | null>(null);
-  const [formData, setFormData] = useState({
-    title: '',
-    subject: '',
-    description: '',
-    image: '',
-    link: '',
-    isActive: true,
-  });
+  const [formData, setFormData] = useState<{
+  title: string;
+  subject: string;
+  description: string;
+  image: File | string;
+  link: string;
+  isActive: boolean;
+}>({
+  title: '',
+  subject: '',
+  description: '',
+  image: '',
+  link: '',
+  isActive: true
+});
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -41,7 +49,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
           description: popupData.description,
           image: popupData.image,
           link: popupData.link,
-          isActive: popupData.isActive,
+          isActive: popupData.isActive
         });
       }
     } catch (error) {
@@ -49,35 +57,44 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
     }
   };
 
-  const handleChange = (field: keyof typeof formData, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      await fetch('https://betawaves-back.4bzwio.easypanel.host/api/popup/update', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: formData.title,
-          subject: formData.subject,
-          description: formData.description,
-          link: formData.link,
-          isActive: formData.isActive,
-          existingImage: formData.image,
-        }),
-      });
+  try {
+    const form = new FormData();
+    form.append('title', formData.title || '');
+    form.append('subject', formData.subject || '');
+    form.append('description', formData.description || '');
+    form.append('link', formData.link || '');
+    form.append('isActive', String(formData.isActive));
 
-      onOpenChange(false);
-    } catch (err) {
-      console.error('Popup update failed', err);
-    } finally {
-      setLoading(false);
+    // 👇 handle file or fallback to existing image
+    if (formData.image instanceof File) {
+      form.append('image', formData.image);
+    } else if (typeof formData.image === 'string') {
+      form.append('existingImage', formData.image); // required by backend
     }
-  };
+
+    await fetch('http://localhost:3000/api/popup/update', {
+      method: 'POST',
+      body: form,
+    });
+
+    onOpenChange(false);
+  } catch (err) {
+    console.error('Popup update failed', err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+  const handleChange = (field: keyof typeof formData, value: string | boolean | File) => {
+  setFormData(prev => ({ ...prev, [field]: value }));
+};
+
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -85,7 +102,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
         <DialogHeader>
           <DialogTitle>Manage Welcome Popup</DialogTitle>
         </DialogHeader>
-
+        
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
@@ -122,22 +139,22 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="image">Image URL</Label>
-            <Input
-              id="image"
-              type="url"
-              value={formData.image}
-              onChange={(e) => handleChange('image', e.target.value)}
-              placeholder="https://example.com/image.jpg"
-              required
-            />
-            {formData.image && (
-              <img
-                src={formData.image}
-                alt="Popup preview"
-                className="w-full h-40 object-cover rounded-md"
-              />
-            )}
+           <Label htmlFor="image">Image</Label>
+<Input
+  id="image"
+  type="file"
+  accept="image/*"
+  onChange={(e) => handleChange('image', e.target.files?.[0] || '')}
+/>
+{typeof formData.image === 'string' && formData.image && (
+  <img
+    src={formData.image}
+    alt="Popup preview"
+    className="w-full h-40 object-cover rounded-md"
+  />
+)}
+
+
           </div>
 
           <div className="space-y-2">
@@ -155,7 +172,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
             <Switch
               id="isActive"
               checked={formData.isActive}
-              onCheckedChange={(checked) => handleChange('isActive', Boolean(checked))}
+              onCheckedChange={(checked) => handleChange('isActive', checked)}
             />
             <Label htmlFor="isActive">Active</Label>
           </div>

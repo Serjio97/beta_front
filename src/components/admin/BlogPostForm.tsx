@@ -1,16 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import { BlogPost } from '@/data/cmsData';
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { TextStyle } from '@tiptap/extension-text-style';
-import Color from '@tiptap/extension-color';
-import { EmailEditor } from '@/components/EmailEditor';
 
 interface BlogPostFormProps {
   isOpen: boolean;
@@ -58,16 +53,33 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     }
   }, [blogPost, isOpen]);
 
-  const editor = useEditor({
-    extensions: [StarterKit, TextStyle, Color],
-    content: formData.content,
-    onUpdate: ({ editor }) => {
-      setFormData(prev => ({ ...prev, content: editor.getHTML() }));
-    },
-  });
-
  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+
+  let imageUrl = formData.image;
+
+  if (imageFile) {
+    const form = new FormData();
+    form.append('image', imageFile);
+
+    try {
+      const res = await fetch('http://localhost:3000/api/uploads/blog-image', {
+        method: 'POST',
+        body: form,
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Upload failed: ${text}`);
+      }
+
+      const data = await res.json();
+      imageUrl = data.url;
+    } catch (error) {
+      console.error('Image upload failed:', error);
+      return;
+    }
+  }
 
   const formattedTags = formData.tags
     .split(',')
@@ -82,12 +94,13 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     category: formData.category,
     publishDate: formData.publishDate,
     tags: formattedTags,
-    image: formData.image
+    image: imageUrl
   });
 
   onClose();
 };
 
+const [imageFile, setImageFile] = useState<File | null>(null);
 const [imagePreview, setImagePreview] = useState<string>('');
 
   return (
@@ -119,18 +132,13 @@ const [imagePreview, setImagePreview] = useState<string>('');
           
           <div>
             <Label htmlFor="content">Content</Label>
-            {/* Tiptap Toolbar */}
-            <div className="space-y-2">
-                      <Label htmlFor="content">Content *</Label>
-                      <EmailEditor
-                        value={formData.content}
-                        onChange={(value) => setFormData(prev => ({ ...prev, content: value }))}
-                        minHeight="250px"
-                      />
-                    </div>
-            <div className="border rounded min-h-[120px] p-2 bg-white">
-              <EditorContent editor={editor} />
-            </div>
+            <Textarea
+              id="content"
+              value={formData.content}
+              onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+              rows={10}
+              required
+            />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
@@ -177,16 +185,18 @@ const [imagePreview, setImagePreview] = useState<string>('');
           </div>
           
           <div>
-  <Label htmlFor="image">Image URL</Label>
+  <Label htmlFor="image">Upload Image</Label>
   <Input
     id="image"
-    type="url"
-    value={formData.image}
-    onChange={e => {
-      setFormData(prev => ({ ...prev, image: e.target.value }));
-      setImagePreview(e.target.value);
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setImageFile(file);
+        setImagePreview(URL.createObjectURL(file));
+      }
     }}
-    placeholder="https://example.com/image.jpg"
     required={!blogPost}
   />
   {imagePreview && (

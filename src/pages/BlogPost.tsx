@@ -38,15 +38,12 @@ const BlogPost = () => {
     fetchBlogPost();
   }, [id]);
 
-  const formatDateTime = (dateString: string) => {
-    const d = new Date(dateString);
-    const date = d.toLocaleDateString('en-US', {
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
-    const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-    return `${date} ${time}`;
   };
 
   const getReadingTime = (content: string) => {
@@ -154,7 +151,7 @@ const BlogPost = () => {
               <div className="flex items-center gap-4 text-sm text-gray-500">
                 <div className="flex items-center gap-1">
                   <Calendar className="h-4 w-4" />
-                  {formatDateTime(blogPost.publishDate)}
+                  {formatDate(blogPost.publishDate)}
                 </div>
                 <div className="flex items-center gap-1">
                   <User className="h-4 w-4" />

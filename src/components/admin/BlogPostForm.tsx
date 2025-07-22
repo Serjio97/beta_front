@@ -31,8 +31,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     content: '',
     author: '',
     category: '',
-    publishDate: '', // ISO string
-    publishTime: '', // 'HH:mm' string
+    publishDate: '',
     tags: '',
     image: ''
   });
@@ -61,21 +60,13 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
   // Only initialize formData and editor content when blogPost changes (not on every open)
   useEffect(() => {
     if (blogPost) {
-      // Split publishDate into date and time
-      let date = '', time = '';
-      if (blogPost.publishDate) {
-        const d = new Date(blogPost.publishDate);
-        date = d.toISOString().slice(0, 10);
-        time = d.toISOString().slice(11, 16);
-      }
       setFormData({
         title: blogPost.title,
         excerpt: blogPost.excerpt,
         content: blogPost.content,
         author: blogPost.author,
         category: blogPost.category,
-        publishDate: date,
-        publishTime: time,
+        publishDate: blogPost.publishDate,
         tags: blogPost.tags.join(', '),
         image: blogPost.image
       });
@@ -89,7 +80,6 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
         author: '',
         category: '',
         publishDate: '',
-        publishTime: '',
         tags: '',
         image: ''
       });
@@ -107,19 +97,13 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     .map(tag => tag.trim())
     .filter(tag => tag);
 
-  // Combine date and time into ISO string
-  let publishDateTime = formData.publishDate;
-  if (formData.publishDate && formData.publishTime) {
-    publishDateTime = formData.publishDate + 'T' + formData.publishTime;
-  }
-
   onSubmit({
     title: formData.title,
     excerpt: formData.excerpt,
     content: formData.content,
     author: formData.author,
     category: formData.category,
-    publishDate: publishDateTime,
+    publishDate: formData.publishDate,
     tags: formattedTags,
     image: formData.image
   });
@@ -250,27 +234,15 @@ const [imagePreview, setImagePreview] = useState<string>('');
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="publishDate">Publish Date</Label>
-              <Input
-                id="publishDate"
-                type="date"
-                value={formData.publishDate}
-                onChange={(e) => setFormData(prev => ({ ...prev, publishDate: e.target.value }))}
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor="publishTime">Publish Time</Label>
-              <Input
-                id="publishTime"
-                type="time"
-                value={formData.publishTime}
-                onChange={(e) => setFormData(prev => ({ ...prev, publishTime: e.target.value }))}
-                required
-              />
-            </div>
+          <div>
+            <Label htmlFor="publishDate">Publish Date</Label>
+            <Input
+              id="publishDate"
+              type="date"
+              value={formData.publishDate}
+              onChange={(e) => setFormData(prev => ({ ...prev, publishDate: e.target.value }))}
+              required
+            />
           </div>
           
           <div>

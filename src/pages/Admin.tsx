@@ -1069,10 +1069,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                       </div>
                       <p className="text-gray-700">{blogPost.excerpt}</p>
                       <div className="text-xs text-gray-600">
-                        Published: {(() => {
-                          const d = new Date(blogPost.publishDate);
-                          return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
-                        })()}
+                        Published: {new Date(blogPost.publishDate).toLocaleDateString()}
                       </div>
                       <div className="flex gap-1 flex-wrap">
                         {blogPost.tags.slice(0, 3).map((tag, index) => (

@@ -7,8 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { BlogPost } from '@/data/cmsData';
 
-const ReactQuill = require('react-quill');
-
 interface BlogPostFormProps {
   isOpen: boolean;
   onClose: () => void;
@@ -111,7 +109,6 @@ const [imagePreview, setImagePreview] = useState<string>('');
         <DialogHeader>
           <DialogTitle>{blogPost ? 'Edit Blog Post' : 'Add New Blog Post'}</DialogTitle>
         </DialogHeader>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label htmlFor="title">Title</Label>

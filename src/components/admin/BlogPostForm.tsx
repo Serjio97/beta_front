@@ -82,6 +82,18 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     onClose();
   };
 
+  const quillModules = {
+    toolbar: [
+      [{ 'header': [1, 2, 3, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      ['blockquote', 'code-block'],
+      ['link', 'image'],
+      ['clean']
+    ]
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -102,12 +114,19 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
 
           <div>
             <Label htmlFor="excerpt">Excerpt</Label>
-            <Textarea
-              id="excerpt"
-              value={formData.excerpt}
-              onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
-              required
-            />
+            <div className="bg-white border rounded">
+              <Suspense fallback={<div>Loading editor...</div>}>
+                <ReactQuill
+                  theme="snow"
+                  value={formData.excerpt}
+                  onChange={(value: string) =>
+                    setFormData(prev => ({ ...prev, excerpt: value }))
+                  }
+                  style={{ minHeight: 100 }}
+                  modules={quillModules}
+                />
+              </Suspense>
+            </div>
           </div>
 
           <div>
@@ -121,6 +140,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
                     setFormData(prev => ({ ...prev, content: value }))
                   }
                   style={{ minHeight: 200 }}
+                  modules={quillModules}
                 />
               </Suspense>
             </div>

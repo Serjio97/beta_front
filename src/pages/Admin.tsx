@@ -1067,10 +1067,12 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                           By {blogPost.author}
                         </span>
                       </div>
-                      <span className="text-xs text-gray-400 block mb-1">{new Date(blogPost.publishDate).toLocaleDateString()}</span>
                       <p className="text-gray-700">{blogPost.excerpt}</p>
                       <div className="text-xs text-gray-600">
-                        Published: {new Date(blogPost.publishDate).toLocaleDateString()}
+                        Published: {(() => {
+                          const d = new Date(blogPost.publishDate);
+                          return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+                        })()}
                       </div>
                       <div className="flex gap-1 flex-wrap">
                         {blogPost.tags.slice(0, 3).map((tag, index) => (

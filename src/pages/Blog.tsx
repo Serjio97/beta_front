@@ -43,12 +43,15 @@ const Blog = () => {
     ? blogPosts 
     : blogPosts.filter(post => post.category === selectedCategory);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDateTime = (dateString: string) => {
+    const d = new Date(dateString);
+    const date = d.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
+    const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+    return `${date} ${time}`;
   };
 
 
@@ -161,13 +164,12 @@ const Blog = () => {
                     <div className="flex items-center gap-4 mb-4">
                       <Badge>{filteredPosts[0].category}</Badge>
                       <span className="text-sm text-gray-500">
-                        {formatDate(filteredPosts[0].publishDate)}
+                        {formatDateTime(filteredPosts[0].publishDate)}
                       </span>
                     </div>
                     <CardTitle className="text-2xl md:text-3xl mb-4">
                       {filteredPosts[0].title}
                     </CardTitle>
-                    <span className="text-xs text-gray-400 block mb-2">{formatDate(filteredPosts[0].publishDate)}</span>
                     <CardDescription className="text-base">
                       {filteredPosts[0].excerpt}
                     </CardDescription>
@@ -236,13 +238,12 @@ const Blog = () => {
                       {post.category}
                     </Badge>
                     <span className="text-xs text-gray-500">
-                      {formatDate(post.publishDate)}
+                      {formatDateTime(post.publishDate)}
                     </span>
                   </div>
                   <CardTitle className="text-lg leading-tight mb-2">
                     {post.title}
                   </CardTitle>
-                  <span className="text-xs text-gray-400 block mb-2">{formatDate(post.publishDate)}</span>
                   <CardDescription className="text-sm line-clamp-3">
                     {post.excerpt}
                   </CardDescription>

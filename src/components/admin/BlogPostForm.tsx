@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -29,8 +30,6 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     tags: '',
     image: ''
   });
-
-  const [imagePreview, setImagePreview] = useState<string>('');
 
   useEffect(() => {
     if (blogPost) {
@@ -67,27 +66,29 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
     },
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    const formattedTags = formData.tags
-      .split(',')
-      .map(tag => tag.trim())
-      .filter(tag => tag);
+  const formattedTags = formData.tags
+    .split(',')
+    .map(tag => tag.trim())
+    .filter(tag => tag);
 
-    onSubmit({
-      title: formData.title,
-      excerpt: formData.excerpt,
-      content: formData.content,
-      author: formData.author,
-      category: formData.category,
-      publishDate: formData.publishDate,
-      tags: formattedTags,
-      image: formData.image
-    });
+  onSubmit({
+    title: formData.title,
+    excerpt: formData.excerpt,
+    content: formData.content,
+    author: formData.author,
+    category: formData.category,
+    publishDate: formData.publishDate,
+    tags: formattedTags,
+    image: formData.image
+  });
 
-    onClose();
-  };
+  onClose();
+};
+
+const [imagePreview, setImagePreview] = useState<string>('');
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -115,7 +116,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
               required
             />
           </div>
-
+          
           <div>
             <Label htmlFor="content">Content</Label>
             {/* Tiptap Toolbar */}
@@ -144,6 +145,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
                 required
               />
             </div>
+            
             <div>
               <Label htmlFor="category">Category</Label>
               <Input
@@ -154,7 +156,7 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
               />
             </div>
           </div>
-
+          
           <div>
             <Label htmlFor="publishDate">Publish Date</Label>
             <Input
@@ -165,39 +167,39 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
               required
             />
           </div>
-
+          
           <div>
             <Label htmlFor="tags">Tags (comma-separated)</Label>
-            <Input
+           <Input
               id="tags"
               value={formData.tags}
               onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
               placeholder="e.g., startup, tech, innovation"
             />
           </div>
-
+          
           <div>
-            <Label htmlFor="image">Image URL</Label>
-            <Input
-              id="image"
-              type="url"
-              value={formData.image}
-              onChange={e => {
-                setFormData(prev => ({ ...prev, image: e.target.value }));
-                setImagePreview(e.target.value);
-              }}
-              placeholder="https://example.com/image.jpg"
-              required={!blogPost}
-            />
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Preview"
-                className="w-24 h-24 object-cover rounded border mt-2"
-              />
-            )}
-          </div>
-
+  <Label htmlFor="image">Image URL</Label>
+  <Input
+    id="image"
+    type="url"
+    value={formData.image}
+    onChange={e => {
+      setFormData(prev => ({ ...prev, image: e.target.value }));
+      setImagePreview(e.target.value);
+    }}
+    placeholder="https://example.com/image.jpg"
+    required={!blogPost}
+  />
+  {imagePreview && (
+    <img
+      src={imagePreview}
+      alt="Preview"
+      className="w-24 h-24 object-cover rounded border mt-2"
+    />
+  )}
+</div>
+          
           <div className="flex gap-2 pt-4">
             <Button type="submit">{blogPost ? 'Update' : 'Add'} Blog Post</Button>
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>

@@ -520,6 +520,17 @@ const deleteConsultingMutation = useMutation({
     }
   });
 
+  const deleteContactMessageMutation = useMutation({
+    mutationFn: (id: string) => apiService.delete(`/contact-messages/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['contact-messages'] });
+      toast({ title: 'Message deleted successfully' });
+    },
+    onError: () => {
+      toast({ title: 'Failed to delete message', variant: 'destructive' });
+    }
+  });
+
   // Handle functions
   const handleServiceSubmit = (data: Omit<Service, 'id'>) => {
     if (editingService) {
@@ -675,6 +686,19 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
               <span className="text-xs text-gray-500">
                 {new Date(message.timestamp).toLocaleDateString()}
               </span>
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-red-600 hover:text-red-700 ml-2"
+                onClick={() => {
+                  if (window.confirm('Are you sure you want to delete this message?')) {
+                    deleteContactMessageMutation.mutate(message.id);
+                  }
+                }}
+              >
+                <Trash2 className="w-4 h-4 mr-1" />
+                Delete
+              </Button>
             </div>
           </CardContent>
         </Card>

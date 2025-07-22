@@ -17,7 +17,7 @@ interface AdminStatsProps {
 const AdminStats = ({ services, teamMembers, products, funds, messages, caseStudies, blogPosts, consulting }: AdminStatsProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-6 mb-7">
-      <Card>
+      {/* <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm text-gray-600">Programs</CardTitle>
         </CardHeader>
@@ -25,7 +25,7 @@ const AdminStats = ({ services, teamMembers, products, funds, messages, caseStud
           <div className="text-2xl font-bold text-primary">{services.length}</div>
           <p className="text-sm text-gray-600">Active programs</p>
         </CardContent>
-      </Card>
+      </Card> */}
 
       <Card>
         <CardHeader className="pb-2">
@@ -57,15 +57,15 @@ const AdminStats = ({ services, teamMembers, products, funds, messages, caseStud
         </CardContent>
       </Card>
       
-      <Card>
+      {/* <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm text-gray-600">Funds</CardTitle>
+          <CardTitle className="text-sm text-gray-600">Investment</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-primary">{funds.length}</div>
-          <p className="text-sm text-gray-600">Investment funds</p>
+          <p className="text-sm text-gray-600">Investment </p>
         </CardContent>
-      </Card>
+      </Card> */}
    
 
       <Card>
@@ -80,7 +80,7 @@ const AdminStats = ({ services, teamMembers, products, funds, messages, caseStud
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm text-gray-600">Case Studies</CardTitle>
+          <CardTitle className="text-sm text-gray-600">Portfolio</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-primary">{caseStudies.length}</div>

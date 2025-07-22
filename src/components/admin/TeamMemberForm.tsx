@@ -1,9 +1,9 @@
 
-import { useEffect,useState } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect } from "react";
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface TeamMember {
@@ -62,31 +62,6 @@ const TeamMemberForm: React.FC<TeamMemberFormProps> = ({ isOpen, onClose, onSubm
 
   let imageUrl = formData.image;
 
-  // If the user selected a File (not a URL string)
-if (imageFile) {
-  const form = new FormData();
-  form.append('image', imageFile); // ✅ this is the File object
-
-  try {
-    const res = await fetch('http://localhost:3000/api/uploads/team-image', {
-  method: 'POST',
-  body: form,
-    });
-
-    if (!res.ok) {
-      const text = await res.text(); // helpful for debugging
-      throw new Error(`Upload failed: ${text}`);
-    }
-
-    const data = await res.json(); // ✅ now this won't fail
-    imageUrl = data.url;
-  } catch (error) {
-    console.error('Image upload failed:', error);
-    return;
-  }
-}
-
-
   // Submit form with updated image URL
   onSubmit({
   name: formData.name,
@@ -100,8 +75,7 @@ if (imageFile) {
 };
 
 
-  const [imageFile, setImageFile] = useState<File | null>(null);
-const [imagePreview, setImagePreview] = useState<string>(formData.image);
+  const [imagePreview, setImagePreview] = useState<string>(formData.image);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -140,19 +114,17 @@ const [imagePreview, setImagePreview] = useState<string>(formData.image);
             />
           </div>
           <div className="space-y-2">
-  <Label htmlFor="image">Upload Profile Image</Label>
+  <Label htmlFor="image">Profile Image URL</Label>
   <Input
     id="image"
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setImageFile(file);
-        setImagePreview(URL.createObjectURL(file));
-      }
+    type="url"
+    value={formData.image}
+    onChange={e => {
+      setFormData(prev => ({ ...prev, image: e.target.value }));
+      setImagePreview(e.target.value);
     }}
-    required={!member} // required only when adding
+    placeholder="https://example.com/image.jpg"
+    required={!member}
   />
   {imagePreview && (
     <img

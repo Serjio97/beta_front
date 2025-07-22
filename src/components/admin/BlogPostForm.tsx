@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Suspense } from "react";
+import 'react-quill/dist/quill.snow.css';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,11 +29,6 @@ const BlogPostForm = ({ isOpen, onClose, onSubmit, blogPost }: BlogPostFormProps
   });
 
   const [imagePreview, setImagePreview] = useState<string>('');
-
-  useEffect(() => {
-    // Dynamically load Quill's CSS only on client
-    import('react-quill/dist/quill.snow.css');
-  }, []);
 
   useEffect(() => {
     if (blogPost) {

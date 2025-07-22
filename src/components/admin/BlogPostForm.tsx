@@ -6,7 +6,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { BlogPost } from '@/data/cmsData';
 
-import 'react-quill/dist/quill.snow.css';
 const ReactQuill = require('react-quill');
 
 interface BlogPostFormProps {

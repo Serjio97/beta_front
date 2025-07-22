@@ -151,7 +151,7 @@ const PopupManagementDialog = ({ open, onOpenChange }: PopupManagementDialogProp
             <Switch
               id="isActive"
               checked={formData.isActive}
-              onCheckedChange={(checked) => handleChange('isActive', checked)}
+              onCheckedChange={(checked) => handleChange('isActive', Boolean(checked))}
             />
             <Label htmlFor="isActive">Active</Label>
           </div>

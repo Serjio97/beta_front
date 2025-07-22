@@ -1,10 +1,10 @@
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import { CaseStudy } from '@/data/cmsData';
 
 interface CaseStudyFormProps {
@@ -67,31 +67,6 @@ tags: caseStudy.tags.join(', '),
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
-  let imageUrl = formData.image;
-
-  if (imageFile) {
-    const form = new FormData();
-    form.append('image', imageFile);
-
-    try {
-      const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/uploads/case-study-image', {
-        method: 'POST',
-        body: form,
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(`Upload failed: ${text}`);
-      }
-
-      const data = await res.json();
-      imageUrl = data.url;
-    } catch (error) {
-      console.error('Image upload failed:', error);
-      return;
-    }
-  }
-
   const formattedResults = formData.results
     .split('\n')
     .map(line => line.trim())
@@ -104,7 +79,6 @@ tags: caseStudy.tags.join(', '),
 
   onSubmit({
     ...formData,
-    image: imageUrl,
     results: formattedResults,
     tags: formattedTags,
   });
@@ -113,7 +87,6 @@ tags: caseStudy.tags.join(', '),
 };
 
 
-const [imageFile, setImageFile] = useState<File | null>(null);
 const [imagePreview, setImagePreview] = useState<string>(formData.image);
 
   return (
@@ -197,18 +170,16 @@ const [imagePreview, setImagePreview] = useState<string>(formData.image);
           </div>
           
          <div>
-  <Label htmlFor="image">Upload Image</Label>
+  <Label htmlFor="image">Image URL</Label>
   <Input
     id="image"
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        setImageFile(file);
-        setImagePreview(URL.createObjectURL(file));
-      }
+    type="url"
+    value={formData.image}
+    onChange={e => {
+      setFormData(prev => ({ ...prev, image: e.target.value }));
+      setImagePreview(e.target.value);
     }}
+    placeholder="https://example.com/image.jpg"
     required={!caseStudy}
   />
   {imagePreview && (

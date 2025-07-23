@@ -26,14 +26,14 @@ const AdminHeader = ({ onLogout, onStyleSettingsOpen,onPopupManagementOpen  }: A
               <MessageSquare size={16} />
               Popup
             </Button>
-            <Button
+           {/*  <Button
               variant="outline"
               onClick={onStyleSettingsOpen}
               className="flex items-center gap-2"
             >
               <Palette size={16} />
               Style Settings
-            </Button>
+            </Button> */}
             <Button variant="outline" onClick={onLogout} className="flex items-center gap-2">
               <LogOut size={16} />
               Logout

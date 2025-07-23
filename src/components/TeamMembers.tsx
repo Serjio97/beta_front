@@ -39,8 +39,10 @@ const TeamMembers = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Sort by id ascending (first added first)
+  const sortedMembers = [...teamMembers].sort((a, b) => Number(a.id) - Number(b.id));
   // 👇 Limit to first 4 if not showing all
-  const visibleMembers = showAll ? teamMembers : teamMembers.slice(0, 4);
+  const visibleMembers = showAll ? sortedMembers : sortedMembers.slice(0, 4);
 
   return (
     <section className="py-20">

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowUp, Users, BookOpen, Home as HomeIcon, Bot, Search, Target, DollarSign, Globe, Zap } from 'lucide-react';
-import { CMSService, Service, CaseStudy, Product, Consulting } from '@/data/cmsData';
+import { CMSService, Service, CaseStudy, Product, Consulting, BlogPost } from '@/data/cmsData';
 import TeamMembers from '@/components/TeamMembers';
 import RunningText from '@/components/RunningText';
 import Collaborators from '@/components/Collaborators';
@@ -17,6 +17,7 @@ const Home = () => {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -168,21 +169,22 @@ const Home = () => {
 
     const fetchData = async () => {
       try {
-        const [servicesData, caseStudiesData, productsData,popupData,consultingData] = await Promise.all([
+        const [servicesData, caseStudiesData, productsData, popupData, consultingData, blogsData] = await Promise.all([
           CMSService.getServices(),
           CMSService.getCaseStudies(),
           CMSService.getProducts(),
           CMSService.getPopup(),
           CMSService.getConsulting(),
+          CMSService.getBlogPosts(),
         ]);
         setServices(servicesData.slice(0, 3)); // Featured services
         setConsulting(consultingData.slice(0, 3));
         setCaseStudies(caseStudiesData.slice(0, 2)); // Featured case studies
         setProducts(productsData.slice(0, 3));
-
-         if (popupData?.isActive) {
-        setShowPopup(true); // ✅ show popup if active
-      }
+        setBlogs(blogsData.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()));
+        if (popupData?.isActive) {
+          setShowPopup(true); // ✅ show popup if active
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -621,6 +623,48 @@ const Home = () => {
           <div className="text-center mt-12">
             <Button asChild>
               <Link to="/case-studies">View All Portfolio</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Newest Blogs Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container-width section-padding">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Latest Blog Posts
+            </h2>
+            <p className="text-xl text-gray-600">
+              Explore our newest insights and stories from the startup world
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {blogs.slice(0, 3).map(blog => (
+              <Card key={blog.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-video">
+                  <img src={blog.image} alt={blog.title} className="w-full h-full object-cover" />
+                </div>
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-medium">{blog.category}</span>
+                    <span className="text-xs text-gray-500">{new Date(blog.publishDate).toLocaleDateString()}</span>
+                  </div>
+                  <CardTitle className="text-lg leading-tight mb-2">{blog.title}</CardTitle>
+                  <CardDescription className="text-sm line-clamp-3">{blog.excerpt}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-600">By {blog.author}</span>
+                    <Link to={`/blog/${blog.id}`} className="text-primary hover:text-primary/80 text-xs font-medium">Read More →</Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Button asChild>
+              <Link to="/blog">View All Blog Posts</Link>
             </Button>
           </div>
         </div>

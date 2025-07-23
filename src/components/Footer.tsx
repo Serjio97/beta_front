@@ -7,13 +7,18 @@ const Footer = () => {
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
-   const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-
+    setEmailError('');
+    // Simple email regex
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
     setSubmitting(true);
-
     try {
       const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/contact-messages', {
         method: 'POST',
@@ -28,7 +33,6 @@ const Footer = () => {
           status: 'unread',
         }),
       });
-
       if (res.ok) {
         setSuccess(true);
         setEmail('');
@@ -83,31 +87,36 @@ const Footer = () => {
 
           {/* Newsletter */}
         <div className="container-width section-padding text-center">
-          <h2 className="text-xl md:text-lg font-semibold mb-2">Stay Updated</h2>
-          <p className="text-sm mb-4 opacity-60 max-w-xs mx-auto">
-            Subscribe to our newsletter for the latest insights.
+          <h2 className="text-xs font-semibold mb-1">Stay Updated</h2>
+          <p className="text-xs mb-2 opacity-60 max-w-[180px] mx-auto">
+            Get the latest insights.
           </p>
 
-          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-xs mx-auto items-center justify-center">
+          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-1 max-w-[220px] mx-auto items-center justify-center">
             <input
               type="email"
-              placeholder="Email address"
-              className="px-2 py-2 rounded-md text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-auto flex-1"
+              placeholder="Email"
+              className="px-1 py-1 rounded-sm text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-auto flex-1 h-7"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setEmailError('');
+              }}
               required
+              style={{ minWidth: 0 }}
             />
             <button
               type="submit"
               disabled={submitting}
-              className="bg-white text-primary px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors w-full sm:w-auto"
-              style={{ minWidth: 90 }}
+              className="bg-white text-primary px-2 py-1 rounded-sm text-xs font-medium hover:bg-gray-100 transition-colors w-full sm:w-auto h-7"
+              style={{ minWidth: 60 }}
             >
               {submitting ? '...' : 'Subscribe'}
             </button>
           </form>
 
-          {success && <p className="text-green-400 mt-2 text-xs">Subscribed!</p>}
+          {emailError && <p className="text-red-400 mt-1 text-xs">{emailError}</p>}
+          {success && <p className="text-green-400 mt-1 text-xs">Subscribed!</p>}
         </div>
         </div>
 

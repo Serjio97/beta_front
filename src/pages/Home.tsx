@@ -26,9 +26,9 @@ const Home = () => {
   const [styleSettings, setStyleSettings] = useState({
     heroType: 'video',
     heroImage: '',
-    heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
+    heroVideoUrl:'https://youtu.be/eMO1VrAD6GE',
     runningTextCompanies: [
-      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Ventuer-Studio', 'Ecosystem-Building', 
+      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Ventuers-Studio', 'Ecosystem-Building', 
       'Worldwide-Connections', 'Emerging-Markets'
     ],
     collaborators: [

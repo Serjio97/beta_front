@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, Link } from 'lucide-react';
+import { ArrowLeft, Link as LucideLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 const Contact = () => {
@@ -17,6 +18,9 @@ const Contact = () => {
     program: '',
     message: ''
   });
+  const [agreePrivacy, setAgreePrivacy] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [checkboxError, setCheckboxError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -30,19 +34,27 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setCheckboxError('');
     setIsSubmitting(true);
 
-    const companyEmailPattern = /^[a-zA-Z0-9._%+-]+@(?!gmail\.com$|yahoo\.com$|hotmail\.com$|outlook\.com$|icloud\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!companyEmailPattern.test(formData.email)) {
-      toast({
-        title: 'Invalid Email',
-        description: 'Please use your company email address (no Gmail, Yahoo, Outlook, etc.)',
-        variant: 'destructive',
-      });
+    if (!agreePrivacy || !agreeTerms) {
+      setCheckboxError('You must agree to the Privacy Policy and Terms of Service.');
       setIsSubmitting(false);
       return;
     }
+
+    // (Optional) You can keep or remove the company email pattern check
+    // const companyEmailPattern = /^[a-zA-Z0-9._%+-]+@(?!gmail\.com$|yahoo\.com$|hotmail\.com$|outlook\.com$|icloud\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // if (!companyEmailPattern.test(formData.email)) {
+    //   toast({
+    //     title: 'Invalid Email',
+    //     description: 'Please use your company email address (no Gmail, Yahoo, Outlook, etc.)',
+    //     variant: 'destructive',
+    //   });
+    //   setIsSubmitting(false);
+    //   return;
+    // }
 
     try {
       const response = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/contact-messages', {
@@ -75,11 +87,13 @@ const Contact = () => {
         program: '',
         message: ''
       });
+      setAgreePrivacy(false);
+      setAgreeTerms(false);
     } catch (error) {
       console.error('Submission error:', error);
       toast({
         title: 'Submission failed',
-        description: (error as Error).message || 'There was a problem sending your message. Please use your company email address (no Gmail, Yahoo, Outlook, etc.',
+        description: (error as Error).message || 'There was a problem sending your message.',
         variant: 'destructive',
       });
     } finally {
@@ -254,6 +268,29 @@ const Contact = () => {
                       />
                     </div>
 
+                    <div className="space-y-2">
+                      <label className="flex items-center gap-2 text-sm">
+                        <input
+                          type="checkbox"
+                          checked={agreePrivacy}
+                          onChange={e => setAgreePrivacy(e.target.checked)}
+                          required
+                        />
+                        I agree to the
+                        <Link to="/privacy-policy" className="underline text-primary" target="_blank">Privacy Policy</Link>
+                      </label>
+                      <label className="flex items-center gap-2 text-sm">
+                        <input
+                          type="checkbox"
+                          checked={agreeTerms}
+                          onChange={e => setAgreeTerms(e.target.checked)}
+                          required
+                        />
+                        I agree to the
+                        <Link to="/terms-of-service" className="underline text-primary" target="_blank">Terms of Service</Link>
+                      </label>
+                      {checkboxError && <div className="text-red-500 text-xs mt-1">{checkboxError}</div>}
+                    </div>
                     <Button
                       type="submit"
                       className="w-full"

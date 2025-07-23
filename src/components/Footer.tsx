@@ -83,16 +83,16 @@ const Footer = () => {
 
           {/* Newsletter */}
         <div className="container-width section-padding text-center">
-          <h2 className="text-3xl md:text-2xl font-semibold mb-4">Stay Updated</h2>
-          <p className="text-1xl mb-8 opacity-50 max-w-2xl mx-auto">
-            Subscribe to our newsletter and get the latest startup insights delivered to your inbox.
+          <h2 className="text-xl md:text-lg font-semibold mb-2">Stay Updated</h2>
+          <p className="text-sm mb-4 opacity-60 max-w-xs mx-auto">
+            Subscribe to our newsletter for the latest insights.
           </p>
 
-          <form onSubmit={handleSubscribe} className="flex flex-col gap-4 max-w-md mx-auto">
+          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-xs mx-auto items-center justify-center">
             <input
               type="email"
-              placeholder="Enter your email"
-              className="px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+              placeholder="Email address"
+              className="px-2 py-2 rounded-md text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-auto flex-1"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -100,13 +100,14 @@ const Footer = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              className="bg-white text-primary px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors w-full sm:w-auto"
+              style={{ minWidth: 90 }}
             >
-              {submitting ? 'Subscribing...' : 'Subscribe'}
+              {submitting ? '...' : 'Subscribe'}
             </button>
           </form>
 
-          {success && <p className="text-green-400 mt-2">Subscribed successfully!</p>}
+          {success && <p className="text-green-400 mt-2 text-xs">Subscribed!</p>}
         </div>
         </div>
 

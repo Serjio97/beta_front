@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import type { StyleSettings } from '@/components/admin/StyleManagementForm';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -729,35 +728,6 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
   
 
 
-  // Fetch style settings from backend
-  const [styleSettings, setStyleSettings] = useState<StyleSettings>({
-    heroType: 'image',
-    heroImage: '',
-    heroVideoUrl: '',
-    runningTextCompanies: [],
-    collaborators: [],
-  });
-
-  useEffect(() => {
-    const fetchStyleSettings = async () => {
-      try {
-        const res = await fetch('http://localhost:3000/api/style-settings');
-        const data = await res.json();
-        setStyleSettings({
-          heroType: data.hero_type === 'video' ? 'video' : 'image',
-          heroImage: data.hero_image,
-          heroVideoUrl: data.hero_video_url,
-          runningTextCompanies: data.running_text_companies,
-          collaborators: data.collaborators,
-        });
-      } catch (error) {
-        console.error('Error fetching style settings:', error);
-      }
-    };
-    fetchStyleSettings();
-  }, []);
-
-
   return (
     <div className="min-h-screen bg-gray-50">
       <AdminHeader 
@@ -1364,17 +1334,24 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
         member={editingTeamMember}
       />
       <StyleManagementForm
-        isOpen={isStyleSettingsOpen}
-        onClose={() => setIsStyleSettingsOpen(false)}
-        onSubmit={async (settings) => {
-          // Optionally refetch settings from backend here if you want to update UI immediately
-          toast({
-            title: "Style updated!",
-            description: "The site style settings were successfully updated.",
-          });
-        }}
-        currentSettings={styleSettings}
-      />
+  isOpen={isStyleSettingsOpen}
+  onClose={() => setIsStyleSettingsOpen(false)}
+  onSubmit={(settings) => {
+    // Save to localStorage or API (depending on your logic)
+    localStorage.setItem('styleSettings', JSON.stringify(settings));
+    toast({
+      title: "Style updated!",
+      description: "The site style settings were successfully updated.",
+    });
+  }}
+  currentSettings={
+    JSON.parse(localStorage.getItem('styleSettings') || JSON.stringify({
+      heroImage: '',
+      runningTextCompanies: [],
+      collaborators: [],
+    }))
+  }
+/>
  <PopupManagementDialog 
         open={showPopupManagement} 
         onOpenChange={setShowPopupManagement} 

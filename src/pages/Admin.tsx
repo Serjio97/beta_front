@@ -745,26 +745,39 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
           messages={contactMessages}
           caseStudies={caseStudies}
           blogPosts={blogPosts}
-          programsApplications={programApplications}
+          /* programsApplications={programApplications} */
         />
         
         <Tabs defaultValue="services" className="mt-9">
           <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9">
-            <TabsTrigger value="services">Programs</TabsTrigger>
+            {/* <TabsTrigger value="services">Programs</TabsTrigger> */}
+            <TabsTrigger value="messages">Messages</TabsTrigger>
+            <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
             <TabsTrigger value="consulting">Consultings</TabsTrigger>
             <TabsTrigger value="products">Products</TabsTrigger>
             {/* <TabsTrigger value="funds">Funds</TabsTrigger> */}
             <TabsTrigger value="case-studies">Portfolio</TabsTrigger>
-            <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
+            
             {/* <TabsTrigger value="events">Events</TabsTrigger> */}
             <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="team">Team</TabsTrigger>
-            <TabsTrigger value="messages">Messages</TabsTrigger>
+
             <TabsTrigger value="admins">Admins</TabsTrigger>
             {/* <TabsTrigger value="applications">Applications</TabsTrigger> */}
           </TabsList>
 
-          <TabsContent value="services" className="mt-6">
+            <TabsContent value="messages" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Contact Messages</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {renderMessagesGrid()}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+         {/*  <TabsContent value="services" className="mt-6">
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -775,6 +788,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                   </Button>
                 </div>
               </CardHeader>
+
               <CardContent>
                 {renderEntityGrid(
                   services,
@@ -816,7 +830,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
 
           <TabsContent value="consulting" className="mt-6">
             <Card>
@@ -927,8 +941,9 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="funds" className="mt-6">
+          {/* <TabsContent value="funds" className="mt-6">
             <Card>
+
               <CardHeader>
                 <div className="flex justify-between items-center">
                   <CardTitle>Funds Management</CardTitle>
@@ -938,6 +953,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                   </Button>
                 </div>
               </CardHeader>
+
               <CardContent>
                 {renderEntityGrid(
                   funds,
@@ -978,7 +994,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
 
           <TabsContent value="case-studies" className="mt-6">
             <Card>
@@ -1088,7 +1104,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="events" className="mt-6">
+          {/* <TabsContent value="events" className="mt-6">
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -1128,7 +1144,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
 
           <TabsContent value="resources" className="mt-6">
             <Card>
@@ -1225,16 +1241,6 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="messages" className="mt-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Contact Messages</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {renderMessagesGrid()}
-              </CardContent>
-            </Card>
-          </TabsContent>
 
           <TabsContent value="admins">
             <AdminManagement />

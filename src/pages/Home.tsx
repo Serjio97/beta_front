@@ -281,10 +281,10 @@ const Home = () => {
   )
   }
 
-  <div className="p-6 bg-white">
+  {/* <div className="p-6 bg-white">
     <h3 className="font-semibold text-gray-900 text-lg">Innovation in Action</h3>
     <p className="text-sm text-gray-600 mt-2">Where ideas meet execution</p>
-  </div>
+  </div> */}
 </div>
 
           </div>

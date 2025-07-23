@@ -22,33 +22,153 @@ const Home = () => {
 
 
   const [styleSettings, setStyleSettings] = useState({
-    heroType: 'image',
+    heroType: 'video',
     heroImage: '',
-    heroVideoUrl: '',
-    runningTextCompanies: [],
-    collaborators: [],
+    heroVideoUrl:'https://www.youtube.com/embed/UtmSyNOdUYQ?si=EB0xgcBK1vQWyBi2',
+    runningTextCompanies: [
+      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Ventuer-Studio', 'Ecosystem-Building', 
+      'Worldwide-Connections', 'Emerging-Markets'
+    ],
+    collaborators: [
+  {
+    id: '1',
+    name: 'Tunisian Startups',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbWdZXtT-buPHs52zpna3LpGtG4VSj1gmRzQ&s',
+    website: 'https://startup.gov.tn/fr/home'
+  },
+  {
+    id: '2',
+    name: 'InvestForJobs',
+    logo: 'https://eina4jobs.org/sites/default/files/styles/large/public/2022-04/313d09e5-6952-4a8a-9e8f-a289e2851be1_1.png?itok=KYfs2tOF',
+    website: 'https://invest-for-jobs.com/en/'
+  },
+  {
+    id: '3',
+    name: 'GIZ',
+    logo: 'https://www.cocoainitiative.org/sites/default/files/logos/gizlogo-unternehmen-de-rgb-300-min.jpg',
+    website: 'https://www.giz.de/en/worldwide/22600.html'
+  },
+  {
+    id: '4',
+    name: 'INNOVI',
+    logo: 'https://innovi.tn/wp-content/uploads/2019/11/Logo300x150-300x150.png',
+    website: 'https://innovi.tn/'
+  },
+  {
+    id: '5',
+    name: 'USAID',
+    logo: 'https://tn.usembassy.gov/wp-content/uploads/sites/59/2017/05/USAID-Logo-1.jpg',
+    website: 'https://tn.usembassy.gov/fr/embassy-fr/ambassade-des-etats-unis-tunis/usaid-en-tunisie/'
+  },
+  {
+    id: '6',
+    name: 'TBS',
+    logo: 'https://tunis-business-school.tn/media/logo_hu3d8e5f27ad81de36e24c8e7a513aea7c_89571_300x300_fit_lanczos_3.png',
+    website: 'https://tunis-business-school.tn/'
+  },
+  {
+    id: '7',
+    name: 'Beta-i',
+    logo: 'https://beta-i.com/wp-content/uploads/2024/10/Logo-Positivo-Color_1-8.png',
+    website: 'https://beta-i.com/'
+  },
+  {
+    id: '8',
+    name: 'TNW',
+    logo: 'https://images.app.goo.gl/q4wLsZC6j2R1ZDbE7',
+    website: 'https://thenextwomentunisie.com/'
+  },
+  {
+    id: '9',
+    name: 'Finastra',
+    logo: 'https://upload.wikimedia.org/wikipedia/fr/2/2f/Finastra.png',
+    website: 'https://www.finastra.com/'
+  },
+  {
+    id: '10',
+    name: '216Capital',
+    logo: 'https://216capital.vc/assets/images/logo-216Capital-black.png',
+    website: 'https://216capital.vc/'
+  },
+  {
+    id: '11',
+    name: 'GPP',
+    logo: 'https://www.global-project-partners.de/media/site/88b0f29413-1612944747/gpp-logo-1200x630-crop-1.png',
+    website: 'https://www.global-project-partners.de/'
+  },
+  {
+    id: '12',
+    name: 'Gnt',
+    logo: 'https://landportal.org/sites/default/files/2023-05/lrQMWH3.png',
+    website: 'https://www.government.nl/'
+  },
+  {
+    id: '13',
+    name: 'ExpertiseFrance',
+    logo: 'https://www.cdc.tn/sites/default/files/2024-07/ef-logo22%20%281%29.png',
+    website: 'https://www.expertisefrance.fr/fr/accueil'
+  },
+  {
+    id: '14',
+    name: 'StartupAct',
+    logo: 'https://www.expert-comptable-tunisie.net/wp-content/uploads/2020/03/startup-act-Tunisie.png',
+    website: 'https://startup.gov.tn/fr/home'
+  },
+  {
+    id: '15',
+    name: 'UNECA',
+    logo: 'https://msme-resurgence.unctad.org/sites/smesurge/files/2021-07/uneca%20main%20logo.png',
+    website: 'https://www.uneca.org/fr'
+  },
+  {
+    id: '16',
+    name: 'STB',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/0/06/Logo_STB.png',
+    website: 'https://www.stb.com.tn/fr/'
+  },
+  {
+    id: '17',
+    name: 'BH',
+    logo: 'https://upload.wikimedia.org/wikipedia/fr/4/44/BH-Bank.png',
+    website: 'https://www.bhbank.tn/'
+  },
+  {
+    id: '18',
+    name: 'Attijari',
+    logo: 'https://www.attijaribank.com.tn/sites/default/files/inline-images/logoAttijari.png',
+    website: 'https://www.attijaribank.com.tn/fr'
+  },
+  {
+    id: '19',
+    name: 'Segal',
+    logo: 'https://www.segalfamilyfoundation.org/wp-content/uploads/SFF-Mobile-Logo.svg',
+    website: 'https://www.segalfamilyfoundation.org/'
+  },
+  {
+    id: '20',
+    name: 'Beta',
+    logo: 'https://aspban.eu/portnetworks/wp-content/uploads/2021/11/Beta-i.png',
+    website: 'https://beta-i.com/'
+  },
+  {
+    id: '21',
+    name: 'Gitex',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH5MTbHcGnfFOqRrlHTA0e7fktBnhboTBroA&s',
+    website: 'https://www.gitexnigeria.ng/'
+  }
+]
   });
 
   useEffect(() => {
-    const fetchStyleSettings = async () => {
-      try {
-        const res = await fetch('http://localhost:3000/api/style-settings');
-        const data = await res.json();
-        setStyleSettings({
-          heroType: (data.hero_type === 'video' ? 'video' : 'image') as 'video' | 'image',
-          heroImage: data.hero_image,
-          heroVideoUrl: data.hero_video_url,
-          runningTextCompanies: data.running_text_companies,
-          collaborators: data.collaborators,
-        });
-      } catch (error) {
-        console.error('Error fetching style settings:', error);
-      }
-    };
+    // Load style settings from localStorage
+    const savedSettings = localStorage.getItem('styleSettings');
+    if (savedSettings) {
+      setStyleSettings(JSON.parse(savedSettings));
+    }
 
     const fetchData = async () => {
       try {
-        const [servicesData, caseStudiesData, productsData, popupData, consultingData] = await Promise.all([
+        const [servicesData, caseStudiesData, productsData,popupData,consultingData] = await Promise.all([
           CMSService.getServices(),
           CMSService.getCaseStudies(),
           CMSService.getProducts(),
@@ -60,17 +180,15 @@ const Home = () => {
         setCaseStudies(caseStudiesData.slice(0, 2)); // Featured case studies
         setProducts(productsData.slice(0, 3));
 
-        if (popupData?.isActive) {
-          setShowPopup(true); // ✅ show popup if active
-        }
+         if (popupData?.isActive) {
+        setShowPopup(true); // ✅ show popup if active
+      }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchStyleSettings();
     fetchData();
   }, []);
 

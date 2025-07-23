@@ -54,11 +54,15 @@ const CookieConsent = () => {
 
   // loadHubspot
   const loadHubspot = () => {
-  const script = document.createElement('script');
-  script.src = 'https://js.hs-scripts.com/your-hubspot-id.js'; // ✅ Replace with your real ID
-  script.async = true;
-  document.body.appendChild(script);
-};
+    if (document.getElementById('hs-script-loader')) return;
+    const script = document.createElement('script');
+    script.src = '//js.hs-scripts.com/44138838.js';
+    script.type = 'text/javascript';
+    script.async = true;
+    script.defer = true;
+    script.id = 'hs-script-loader';
+    document.body.appendChild(script);
+  };
 
   const handleAcceptAll = () => {
     const newPreferences = {

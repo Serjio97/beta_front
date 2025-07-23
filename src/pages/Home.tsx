@@ -220,7 +220,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary/10 via-blue-50 to-primary/5 py-20">
         <div className="container-width section-padding">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-6 md:text-4xl">
                 Driving Innovation, Investment, and Ecosystem Growth
@@ -260,32 +260,31 @@ const Home = () => {
               </div>
             </div>
             
-         <div className="rounded-md shadow-xl overflow-hidden transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl mt-8 md:mt-0" >
-  {styleSettings.heroType === 'video' ? (
-    <div className="aspect-video w-full">
-      <iframe
-        src={styleSettings.heroVideoUrl.replace('watch?v=', 'embed/')}
-        title="Hero Video"
-        className="w-full h-full"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-    </div>
-  ) 
-  :(
-    <img
-      src={styleSettings.heroImage}
-      alt="Hero"
-      className="w-full h-72 object-cover"
-    />
-  )
-  }
-
-  <div className="p-6 bg-white">
-    <h3 className="font-semibold text-gray-900 text-lg">Innovation in Action</h3>
-    <p className="text-sm text-gray-600 mt-2">Where ideas meet execution</p>
-  </div>
-</div>
+         <div className="relative">
+           <div className="bg-white rounded-2xl shadow-2xl p-4 md:p-8 transform md:rotate-3 hover:rotate-0 transition-transform duration-300">
+             {styleSettings.heroType === 'video' ? (
+               <div className="aspect-video w-full">
+                 <iframe
+                   src={styleSettings.heroVideoUrl.replace('watch?v=', 'embed/')}
+                   title="Hero Video"
+                   className="w-full h-full rounded-lg"
+                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                   allowFullScreen
+                 />
+               </div>
+             ) : (
+               <img
+                 src={styleSettings.heroImage || '/lovable-uploads/1d16839f-1293-4868-96a6-d3a7e8489861.jpg'}
+                 alt="Hero"
+                 className="rounded-lg w-full h-64 object-cover"
+               />
+             )}
+             <div className="mt-4">
+               <h3 className="font-semibold text-gray-900">Innovation in Action</h3>
+               <p className="text-gray-600 text-sm">Where ideas meet execution</p>
+             </div>
+           </div>
+         </div>
 
           </div>
         </div>
@@ -297,7 +296,7 @@ const Home = () => {
     
 
       {/* Mission Highlights */}
-      <section className="py-12 md:py-20">
+      <section className="py-20">
         <div className="container-width section-padding">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -308,7 +307,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Users className="h-8 w-8 text-primary" />
@@ -388,7 +387,7 @@ const Home = () => {
       </section> */}
 
       {/* Featured Consulting */}
-      <section className="py-12 md:py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50">
         <div className="container-width section-padding">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -399,7 +398,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {consulting.map(consulting => {
             const IconComponent = getIcon(consulting.icon);
             return <Card key={consulting.id} className="h-full hover:shadow-lg transition-shadow">
@@ -434,7 +433,7 @@ const Home = () => {
       </section>
 
       {/* Products Preview Section */}
-      <section className="py-12 md:py-20 bg-gray-900 text-white">
+      <section className="py-20 bg-gray-900 text-white">
         <div className="container-width section-padding">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -445,7 +444,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
            {products.map(product => (
   <Card key={product.id} className="h-full hover:shadow-lg transition-shadow bg-gray-800 border-gray-700 text-white">
     <CardHeader>
@@ -482,7 +481,7 @@ const Home = () => {
       </section>
 
       {/* Enhanced Fund Highlight Section */}
-      <section className="py-12 md:py-20 bg-gradient-to-br from-blue-600 via-primary to-cyan-500 text-white relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-blue-600 via-primary to-cyan-500 text-white relative overflow-hidden">
         {/* Enhanced backdrop pattern */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full -translate-x-48 -translate-y-48"></div>
@@ -526,7 +525,7 @@ const Home = () => {
               </CardHeader>
               
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
                   <div className="text-center group">
                     <div className="w-10 h-10 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                       <DollarSign className="h-5 w-5 text-white" />
@@ -582,7 +581,7 @@ const Home = () => {
       </section>
 
       {/* Success Stories Preview */}
-      <section className="py-12 md:py-20 ">
+      <section className="py-20 ">
         <div className="container-width section-padding">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -593,7 +592,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {caseStudies.map(caseStudy => <Card key={caseStudy.id} className="overflow-hidden">
                 <div className="aspect-video">
                   <img src={caseStudy.image} alt={caseStudy.companyName} className="w-full h-full object-cover" />
@@ -630,7 +629,7 @@ const Home = () => {
       </section>
 
       {/* Newest Blogs Section */}
-      <section className="py-12 md:py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50">
         <div className="container-width section-padding">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -640,7 +639,7 @@ const Home = () => {
               Explore our newest insights and stories from the startup world
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {blogs.slice(0, 3).map(blog => (
               <Card key={blog.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="aspect-video">
@@ -680,7 +679,7 @@ const Home = () => {
 
 
       {/* CTA Section */}
-      <section className="py-12 md:py-20 bg-primary text-white">
+      <section className="py-20 bg-primary text-white">
         <div className="container-width section-padding text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Transform Your Startup?

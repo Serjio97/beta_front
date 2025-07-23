@@ -87,36 +87,34 @@ const Footer = () => {
 
           {/* Newsletter */}
         <div className="container-width section-padding text-center">
-          <h2 className="text-xs font-semibold mb-1">Stay Updated</h2>
-          <p className="text-xs mb-2 opacity-60 max-w-[180px] mx-auto">
-            Get the latest insights.
+          <h2 className="text-3xl md:text-2xl font-semibold mb-4">Stay Updated</h2>
+          <p className="text-1xl mb-8 opacity-50 max-w-2xl mx-auto">
+            Subscribe to our newsletter and get the latest startup insights delivered to your inbox.
           </p>
 
-          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-1 max-w-[220px] mx-auto items-center justify-center">
+          <form onSubmit={handleSubscribe} className="flex flex-col gap-4 max-w-md mx-auto">
             <input
               type="email"
-              placeholder="Email"
-              className="px-1 py-1 rounded-sm text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-white w-full sm:w-auto flex-1 h-7"
+              placeholder="Enter your email"
+              className="px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 setEmailError('');
               }}
               required
-              style={{ minWidth: 0 }}
             />
             <button
               type="submit"
               disabled={submitting}
-              className="bg-white text-primary px-2 py-1 rounded-sm text-xs font-medium hover:bg-gray-100 transition-colors w-full sm:w-auto h-7"
-              style={{ minWidth: 60 }}
+              className="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
             >
-              {submitting ? '...' : 'Subscribe'}
+              {submitting ? 'Subscribing...' : 'Subscribe'}
             </button>
           </form>
 
-          {emailError && <p className="text-red-400 mt-1 text-xs">{emailError}</p>}
-          {success && <p className="text-green-400 mt-1 text-xs">Subscribed!</p>}
+          {emailError && <p className="text-red-400 mt-2 text-xs">{emailError}</p>}
+          {success && <p className="text-green-400 mt-2 text-xs">Subscribed successfully!</p>}
         </div>
         </div>
 

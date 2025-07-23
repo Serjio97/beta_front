@@ -169,8 +169,8 @@ const ConsultingPage = () => {
             <Button size="lg" variant="secondary">
               <Link to="/contact">Book a session</Link>
             </Button>
-            <Button size="lg" variant="secondary">
-              <Link to="/case-studies">Download our brochure</Link>
+            <Button size="lg" variant="secondary" asChild>
+              <a href="https://hubs.ly/Q03yCr_T0" target="_blank" rel="noopener noreferrer">Download Our Brochure</a>
             </Button>
           </div>
         </div>

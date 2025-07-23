@@ -178,8 +178,8 @@ const Products = () => {
             <Button size="lg" asChild>
               <Link to="/contact">Contact Us</Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link to="/resources">View Resources</Link>
+            <Button size="lg" variant="secondary" asChild>
+              <a href="https://hubs.ly/Q03yCr_T0" target="_blank" rel="noopener noreferrer">Download Our Brochure</a>
             </Button>
           </div>
         </div>

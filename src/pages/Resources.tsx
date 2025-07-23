@@ -177,12 +177,12 @@ const handleDownloadClick = (resource: Resource) => {
             Our resources are just the beginning. Join our programs for personalized guidance 
             and expert mentorship to take your startup to the next level.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
-              <Link to="/fund">View Investment</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
               <Link to="/contact">Contact Us</Link>
+            </Button>
+            <Button size="lg" variant="secondary" asChild>
+              <a href="https://hubs.ly/Q03yCr_T0" target="_blank" rel="noopener noreferrer">Download Our Brochure</a>
             </Button>
           </div>
         </div>

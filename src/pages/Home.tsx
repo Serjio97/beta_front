@@ -10,6 +10,7 @@ import RunningText from '@/components/RunningText';
 import Collaborators from '@/components/Collaborators';
 
 import WelcomePopup from '@/components/WelcomePopup';
+import { Base64 } from 'js-base64';
 
 const Home = () => {
   const [services, setServices] = useState<Service[]>([]);
@@ -656,7 +657,7 @@ const Home = () => {
                 <CardContent>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-600">By {blog.author}</span>
-                    <Link to={`/blog/${blog.id}`} className="text-primary hover:text-primary/80 text-xs font-medium">Read More →</Link>
+                    <Link to={`/blog/${Base64.encode(blog.id)}`} className="text-primary hover:text-primary/80 text-xs font-medium">Read More →</Link>
                   </div>
                 </CardContent>
               </Card>

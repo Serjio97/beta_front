@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { useAdmin } from '@/contexts/AdminContext';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { Base64 } from 'js-base64';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
@@ -29,7 +30,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         description: "Welcome to the admin dashboard",
       });
 
-      navigate('/admin/dashboard');  // ✅ redirect to dashboard
+      navigate(`/admin/${Base64.encode('dashboard')}`);  // ✅ redirect to obfuscated dashboard
     } else {
       toast({
         title: "Login failed",

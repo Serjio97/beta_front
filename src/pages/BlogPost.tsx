@@ -6,9 +6,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Calendar, User, Clock, Share2 } from 'lucide-react';
 import { CMSService, BlogPost as BlogPostType } from '@/data/cmsData';
 import { useToast } from '@/hooks/use-toast';
+import { Base64 } from 'js-base64';
 
 const BlogPost = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id: encodedId } = useParams<{ id: string }>();
+  const id = encodedId ? Base64.decode(encodedId) : '';
   const [blogPost, setBlogPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
   const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
@@ -38,12 +40,15 @@ const BlogPost = () => {
     fetchBlogPost();
   }, [id]);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDateTime = (dateString: string) => {
+    const d = new Date(dateString);
+    const date = d.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
+    const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+    return `${date} ${time}`;
   };
 
   const getReadingTime = (content: string) => {
@@ -151,7 +156,7 @@ const BlogPost = () => {
               <div className="flex items-center gap-4 text-sm text-gray-500">
                 <div className="flex items-center gap-1">
                   <Calendar className="h-4 w-4" />
-                  {formatDate(blogPost.publishDate)}
+                  {formatDateTime(blogPost.publishDate)}
                 </div>
                 <div className="flex items-center gap-1">
                   <User className="h-4 w-4" />

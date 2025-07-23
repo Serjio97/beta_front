@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { CMSService, BlogPost } from '@/data/cmsData';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { Base64 } from 'js-base64';
 
 // Utility to strip HTML tags and get plain text
 function getPlainTextFromHTML(html: string) {
@@ -43,12 +44,15 @@ const Blog = () => {
     ? blogPosts 
     : blogPosts.filter(post => post.category === selectedCategory);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDateTime = (dateString: string) => {
+    const d = new Date(dateString);
+    const date = d.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
+    const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+    return `${date} ${time}`;
   };
 
 
@@ -161,7 +165,7 @@ const Blog = () => {
                     <div className="flex items-center gap-4 mb-4">
                       <Badge>{filteredPosts[0].category}</Badge>
                       <span className="text-sm text-gray-500">
-                        {formatDate(filteredPosts[0].publishDate)}
+                        {formatDateTime(filteredPosts[0].publishDate)}
                       </span>
                     </div>
                     <CardTitle className="text-2xl md:text-3xl mb-4">
@@ -201,7 +205,7 @@ const Blog = () => {
                         </div>
                       </div>
                       <Link 
-                        to={`/blog/${filteredPosts[0].id}`}
+                        to={`/blog/${Base64.encode(filteredPosts[0].id)}`}
                         className="text-primary hover:text-primary/80 font-medium text-sm"
                       >
                         Read More →
@@ -235,7 +239,7 @@ const Blog = () => {
                       {post.category}
                     </Badge>
                     <span className="text-xs text-gray-500">
-                      {formatDate(post.publishDate)}
+                      {formatDateTime(post.publishDate)}
                     </span>
                   </div>
                   <CardTitle className="text-lg leading-tight mb-2">
@@ -257,10 +261,10 @@ const Blog = () => {
                       <span className="text-sm text-gray-600">{post.author}</span>
                     </div>
                     <Link 
-                      to={`/blog/${post.id}`}
+                      to={`/blog/${Base64.encode(post.id)}`}
                       className="text-primary hover:text-primary/80 text-sm font-medium"
                     >
-                      Read →
+                      Read More →
                     </Link>
                   </div>
                   

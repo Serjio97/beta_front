@@ -28,6 +28,7 @@ import CookieConsent from "@/components/CookieConsent";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
+import { Base64 } from 'js-base64';
 
 const queryClient = new QueryClient();
 
@@ -55,7 +56,7 @@ const App = () => (
                 <Route path="/events" element={<Events />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/admin" element={<AdminLogin />} />
-                <Route path="/admin/dashboard" element={
+                <Route path="/admin/:dash" element={
                   <ProtectedRoute>
                     <Admin />
                   </ProtectedRoute>

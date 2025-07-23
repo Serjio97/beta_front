@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
+import { Base64 } from 'js-base64';
 import { useAdmin } from '@/contexts/AdminContext';
 
 import AdminHeader from '@/components/admin/AdminHeader';
@@ -712,6 +713,12 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
     }
   }, [loading, isAdminLoggedIn, navigate]);
 
+  // Obfuscated dashboard route check
+  const { dash } = useParams();
+  if (dash && Base64.decode(dash) !== 'dashboard') {
+    return <Navigate to="/" />;
+  }
+
   // ✅ UI guards AFTER all hooks
   if (loading) {
     return <div className="p-10 text-center text-gray-400">Checking admin session...</div>;
@@ -745,39 +752,26 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
           messages={contactMessages}
           caseStudies={caseStudies}
           blogPosts={blogPosts}
-          /* programsApplications={programApplications} */
+          programsApplications={programApplications}
         />
         
         <Tabs defaultValue="services" className="mt-9">
           <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9">
-            {/* <TabsTrigger value="services">Programs</TabsTrigger> */}
-            <TabsTrigger value="messages">Messages</TabsTrigger>
-            <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
+            <TabsTrigger value="services">Programs</TabsTrigger>
             <TabsTrigger value="consulting">Consultings</TabsTrigger>
             <TabsTrigger value="products">Products</TabsTrigger>
             {/* <TabsTrigger value="funds">Funds</TabsTrigger> */}
             <TabsTrigger value="case-studies">Portfolio</TabsTrigger>
-            
+            <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
             {/* <TabsTrigger value="events">Events</TabsTrigger> */}
             <TabsTrigger value="resources">Resources</TabsTrigger>
             <TabsTrigger value="team">Team</TabsTrigger>
-
+            <TabsTrigger value="messages">Messages</TabsTrigger>
             <TabsTrigger value="admins">Admins</TabsTrigger>
             {/* <TabsTrigger value="applications">Applications</TabsTrigger> */}
           </TabsList>
 
-            <TabsContent value="messages" className="mt-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Contact Messages</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {renderMessagesGrid()}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-         {/*  <TabsContent value="services" className="mt-6">
+          <TabsContent value="services" className="mt-6">
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -788,7 +782,6 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                   </Button>
                 </div>
               </CardHeader>
-
               <CardContent>
                 {renderEntityGrid(
                   services,
@@ -830,7 +823,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent> */}
+          </TabsContent>
 
           <TabsContent value="consulting" className="mt-6">
             <Card>
@@ -941,9 +934,8 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
-          {/* <TabsContent value="funds" className="mt-6">
+          <TabsContent value="funds" className="mt-6">
             <Card>
-
               <CardHeader>
                 <div className="flex justify-between items-center">
                   <CardTitle>Funds Management</CardTitle>
@@ -953,7 +945,6 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                   </Button>
                 </div>
               </CardHeader>
-
               <CardContent>
                 {renderEntityGrid(
                   funds,
@@ -994,7 +985,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent> */}
+          </TabsContent>
 
           <TabsContent value="case-studies" className="mt-6">
             <Card>
@@ -1104,7 +1095,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
-          {/* <TabsContent value="events" className="mt-6">
+          <TabsContent value="events" className="mt-6">
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -1144,7 +1135,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent> */}
+          </TabsContent>
 
           <TabsContent value="resources" className="mt-6">
             <Card>
@@ -1241,6 +1232,16 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             </Card>
           </TabsContent>
 
+          <TabsContent value="messages" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Contact Messages</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {renderMessagesGrid()}
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           <TabsContent value="admins">
             <AdminManagement />

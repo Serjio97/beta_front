@@ -62,9 +62,9 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20">
+      <section className="py-8 md:py-20">
         <div className="container-width section-padding">
-          <div className="grid grid-cols-1 gap-12">
+          <div className="grid grid-cols-1 gap-4 md:gap-12">
             {services.map((service, index) => {
               const IconComponent = getIcon(service.icon);
               return (

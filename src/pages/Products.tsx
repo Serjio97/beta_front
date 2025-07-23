@@ -90,7 +90,7 @@ const Products = () => {
       </section>
 
       {/* Products Section */}
-      <section className="py-20">
+      <section className="py-8 md:py-20">
         <div className="container-width section-padding">
           {/* Filter */}
           <div className="flex justify-between items-center mb-8">
@@ -98,7 +98,7 @@ const Products = () => {
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">Filter by category:</span>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-48">
+                <SelectTrigger className="w-full md:w-48">
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
@@ -113,7 +113,7 @@ const Products = () => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8">
             {filteredProducts.map((product) => (
               <Card key={product.id} className="h-full flex flex-col justify-between hover:shadow-lg transition-shadow">
                 <CardHeader>

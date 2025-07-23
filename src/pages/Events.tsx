@@ -98,7 +98,7 @@ const Events = () => {
       </section>
 
       {/* Events Grid */}
-      <section className="py-20">
+      <section className="py-8 md:py-20">
         <div className="container-width section-padding">
           {filteredEvents.length === 0 ? (
             <div className="text-center py-20">
@@ -107,7 +107,7 @@ const Events = () => {
               <p className="text-gray-600">Check back soon for upcoming events!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {filteredEvents.map((event, index) => (
                 <Card key={event.id} className={`overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 ${index === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}>
                   <div className={`${index === 0 ? 'md:flex' : ''}`}>

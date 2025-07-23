@@ -86,9 +86,9 @@ const CaseStudies = () => {
       </section>
 
       {/* Case Studies Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-8 md:py-20 bg-gray-50">
         <div className="container-width section-padding">
-          <div className="grid grid-cols-1 gap-12">
+          <div className="grid grid-cols-1 gap-4 md:gap-12">
             {filteredCaseStudies.map((caseStudy, index) => (
               <Card key={caseStudy.id} className={`overflow-hidden  hover:shadow-xl transition-all duration-300 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
                 <div className="lg:flex">

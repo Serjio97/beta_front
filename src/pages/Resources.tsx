@@ -100,7 +100,7 @@ const handleDownloadClick = (resource: Resource) => {
       </section>
 
       {/* Resources Section */}
-      <section className="py-20">
+      <section className="py-8 md:py-20">
         <div className="container-width section-padding">
           {/* Filter */}
           <div className="flex justify-between items-center mb-8">
@@ -108,7 +108,7 @@ const handleDownloadClick = (resource: Resource) => {
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">Filter by type:</span>
               <Select value={selectedType} onValueChange={setSelectedType}>
-                <SelectTrigger className="w-48">
+                <SelectTrigger className="w-full md:w-48">
                   <SelectValue placeholder="Select type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -123,7 +123,7 @@ const handleDownloadClick = (resource: Resource) => {
           </div>
 
           {/* Resources Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {filteredResources.map((resource) => {
               const IconComponent = getIcon(resource.type);
               return (

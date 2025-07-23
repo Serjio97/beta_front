@@ -220,9 +220,9 @@ const Blog = () => {
       )}
 
       {/* Blog Posts Grid */}
-      <section className="py-16">
+      <section className="py-8 md:py-20">
         <div className="container-width section-padding">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {filteredPosts.slice(1).map((post) => (
               <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="aspect-video">

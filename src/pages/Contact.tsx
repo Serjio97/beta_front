@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Link as LucideLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 
 const Contact = () => {
@@ -24,7 +23,6 @@ const Contact = () => {
   const [checkboxError, setCheckboxError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -35,10 +33,17 @@ const Contact = () => {
     }));
   };
 
-  const handleCaptchaChange = (token: string | null) => {
-    setCaptchaToken(token);
-    setCaptchaError('');
-  };
+  const siteKey = '6LcEaI0rAAAAAB9rhVBjMmUSFxoCb7aDgRn18vfu';
+
+  useEffect(() => {
+    // Load reCAPTCHA v3 script
+    if (!window.grecaptcha) {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,8 +56,13 @@ const Contact = () => {
       setIsSubmitting(false);
       return;
     }
-    if (!captchaToken) {
-      setCaptchaError('Please complete the CAPTCHA.');
+
+    // reCAPTCHA v3: get token
+    let captchaToken = '';
+    if (window.grecaptcha) {
+      captchaToken = await window.grecaptcha.execute(siteKey, { action: 'submit' });
+    } else {
+      setCaptchaError('reCAPTCHA failed to load. Please try again.');
       setIsSubmitting(false);
       return;
     }
@@ -233,7 +243,7 @@ const Contact = () => {
                           onChange={handleInputChange}
                           required
                           className="mt-1"
-                          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                          pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9._%+\-]+\.[a-zA-Z]{2,}$"
                           title="Please use your company email address (e.g., no Gmail, Yahoo, or Hotmail)"
                         />
                       </div>
@@ -306,13 +316,7 @@ const Contact = () => {
                       </label>
                       {checkboxError && <div className="text-red-500 text-xs mt-1">{checkboxError}</div>}
                     </div>
-                    <div className="flex flex-col items-center">
-                      <ReCAPTCHA
-                        sitekey="6LcEaI0rAAAAAB9rhVBjMmUSFxoCb7aDgRn18vfu"
-                        onChange={handleCaptchaChange}
-                      />
-                      {captchaError && <div className="text-red-500 text-xs mt-1">{captchaError}</div>}
-                    </div>
+                    {captchaError && <div className="text-red-500 text-xs mt-1">{captchaError}</div>}
                     <Button
                       type="submit"
                       className="w-full"

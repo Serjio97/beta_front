@@ -342,3 +342,9 @@ const Contact = () => {
 };
 
 export default Contact;
+
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}

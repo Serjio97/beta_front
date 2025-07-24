@@ -233,7 +233,7 @@ const Contact = () => {
                           onChange={handleInputChange}
                           required
                           className="mt-1"
-                          pattern="^[a-zA-Z0-9._%+-]+@(?!gmail\.com$|yahoo\.com$|hotmail\.com$|outlook\.com$|icloud\.com$)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                           title="Please use your company email address (e.g., no Gmail, Yahoo, or Hotmail)"
                         />
                       </div>

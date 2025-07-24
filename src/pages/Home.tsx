@@ -564,7 +564,7 @@ const Home = () => {
                   <div className="text-center">
                     <p className="text-white/90 text-sm mb-3 font-medium">For Investors</p>
                     <Button size="lg" variant="outline" className="border-2 border-white text-primary hover:bg-white hover:text-primary font-semibold px-8 py-3 rounded-xl transition-all" asChild>
-                <a href="https://betaventuresfund1.decilehub.com/pacts?pid=9nGqvjKm&dgrid=08c2c772-f426-4763-a30a-6ad9d7279dd3" target="_blank" rel="noopener noreferrer">Invest With Us</a>
+                <a href="https://betaventuresfund1.decilehub.com/pacts?pid=9nGqvjKm&dgrid=08c2c772-f426-4763-a30a-6ad9d7279dd3" target="_blank" rel="noopener noreferrer">Reserve a Position</a>
                     </Button>
                   </div>
                 </div>

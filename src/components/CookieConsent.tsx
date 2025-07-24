@@ -36,7 +36,7 @@ const CookieConsent = () => {
 
   const loadGoogleAnalytics = () => {
     // Replace 'G-XXXXXXXXXX' with your actual Google Analytics Measurement ID
-    const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+    const GA_MEASUREMENT_ID = 'G-0THSG15DXZ';
     
     // Load gtag script
     const script = document.createElement('script');

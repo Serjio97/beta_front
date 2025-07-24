@@ -1,6 +1,17 @@
 
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const siteKey = '6LcEaI0rAAAAAB9rhVBjMmUSFxoCb7aDgRn18vfu';
+
+useEffect(() => {
+  if (!window.grecaptcha) {
+    const script = document.createElement('script');
+    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+    script.async = true;
+    document.body.appendChild(script);
+  }
+}, []);
 
 const Footer = () => {
 
@@ -19,6 +30,14 @@ const Footer = () => {
       return;
     }
     setSubmitting(true);
+    let captchaToken = '';
+    if (window.grecaptcha) {
+      captchaToken = await window.grecaptcha.execute(siteKey, { action: 'newsletter' });
+    } else {
+      setEmailError('reCAPTCHA failed to load. Please try again.');
+      setSubmitting(false);
+      return;
+    }
     try {
       const res = await fetch('https://betawaves-back.4bzwio.easypanel.host/api/contact-messages', {
         method: 'POST',
@@ -29,17 +48,21 @@ const Footer = () => {
           name: '',
           email,
           subject: 'Newsletter',
-          message: '',
+          message: 'Newsletter signup',
           status: 'unread',
+          recaptchaToken: captchaToken,
         }),
       });
       if (res.ok) {
         setSuccess(true);
         setEmail('');
         setTimeout(() => setSuccess(false), 3000);
+      } else {
+        const errorData = await res.json();
+        setEmailError(errorData.error || 'Subscription failed.');
       }
     } catch (error) {
-      console.error('Newsletter subscription error:', error);
+      setEmailError('Newsletter subscription error.');
     } finally {
       setSubmitting(false);
     }
@@ -134,3 +157,9 @@ const Footer = () => {
 };
 
 export default Footer;
+
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}

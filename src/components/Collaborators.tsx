@@ -16,7 +16,7 @@ const Collaborators: React.FC<CollaboratorsProps> = ({ collaborators }) => {
     <div className="bg-gray-50 py-6">
       <div className="container-width section-padding">
         <div className="text-center">
-          <h3 className="text-lg font-semibold text-gray-700 mb-6">Our Partners</h3>
+          <h3 className="text-lg font-semibold text-gray-700 mb-6">We Worked With</h3>
           <div className="flex flex-wrap justify-center items-center gap-4">
             {collaborators.map((collab) => (
               <a

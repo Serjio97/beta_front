@@ -44,15 +44,13 @@ const Blog = () => {
     ? blogPosts 
     : blogPosts.filter(post => post.category === selectedCategory);
 
-  const formatDateTime = (dateString: string) => {
+  const formatDate = (dateString: string) => {
     const d = new Date(dateString);
-    const date = d.toLocaleDateString('en-US', {
+    return d.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
-    const time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-    return `${date} ${time}`;
   };
 
 
@@ -165,7 +163,7 @@ const Blog = () => {
                     <div className="flex items-center gap-4 mb-4">
                       <Badge>{filteredPosts[0].category}</Badge>
                       <span className="text-sm text-gray-500">
-                        {formatDateTime(filteredPosts[0].publishDate)}
+                        {formatDate(filteredPosts[0].publishDate)}
                       </span>
                     </div>
                     <CardTitle className="text-2xl md:text-3xl mb-4">
@@ -239,7 +237,7 @@ const Blog = () => {
                       {post.category}
                     </Badge>
                     <span className="text-xs text-gray-500">
-                      {formatDateTime(post.publishDate)}
+                      {formatDate(post.publishDate)}
                     </span>
                   </div>
                   <CardTitle className="text-lg leading-tight mb-2">

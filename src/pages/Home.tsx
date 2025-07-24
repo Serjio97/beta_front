@@ -26,7 +26,7 @@ const Home = () => {
   const [styleSettings, setStyleSettings] = useState({
     heroType: 'video',
     heroImage: '',
-    heroVideoUrl:'https://www.youtube.com/watch?v=eMO1VrAD6GE',
+    heroVideoUrl:'https://www.youtube.com/watch?v=hlZu4AMKyds',
     runningTextCompanies: [
       'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Ventuers-Studio', 'Ecosystem-Building', 
       'Worldwide-Connections', 'Emerging-Markets'
@@ -237,9 +237,9 @@ const Home = () => {
                   <Link to="/contact">Start Your Journey</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild className="w-full sm:w-auto focus:ring-2 focus:ring-primary">
-                  <a href="https://www.hubspot.fr/" target="_blank" rel="noopener noreferrer">
-    Download Our Brochure
-  </a>
+                  <a href="https://hubs.ly/Q03yCr_T0" target="_blank" rel="noopener noreferrer">
+                    Download Our Brochure
+                  </a>
                 </Button>
               </div>
               
@@ -691,7 +691,9 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto focus:ring-2 focus:ring-white">
-              <Link to="/contact">Download Brochure</Link>
+              <a href="https://hubs.ly/Q03yCr_T0" target="_blank" rel="noopener noreferrer">
+                    Download Our Brochure
+                  </a>
             </Button>
           
           </div>

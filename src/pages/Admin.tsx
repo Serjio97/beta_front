@@ -757,21 +757,25 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
         
         <Tabs defaultValue="services" className="mt-9">
           <TabsList className="grid w-full grid-cols-5 lg:grid-cols-9">
-            <TabsTrigger value="services">Programs</TabsTrigger>
+            {/* <TabsTrigger value="services">Programs</TabsTrigger> */}
+
+            <TabsTrigger value="messages">Messages</TabsTrigger>
             <TabsTrigger value="consulting">Consultings</TabsTrigger>
             <TabsTrigger value="products">Products</TabsTrigger>
+            <TabsTrigger value="resources">Resources</TabsTrigger>
             {/* <TabsTrigger value="funds">Funds</TabsTrigger> */}
             <TabsTrigger value="case-studies">Portfolio</TabsTrigger>
+            
             <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
             {/* <TabsTrigger value="events">Events</TabsTrigger> */}
-            <TabsTrigger value="resources">Resources</TabsTrigger>
+            
             <TabsTrigger value="team">Team</TabsTrigger>
-            <TabsTrigger value="messages">Messages</TabsTrigger>
+            
             <TabsTrigger value="admins">Admins</TabsTrigger>
             {/* <TabsTrigger value="applications">Applications</TabsTrigger> */}
           </TabsList>
 
-          <TabsContent value="services" className="mt-6">
+          {/* <TabsContent value="services" className="mt-6">
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
@@ -823,7 +827,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
                 )}
               </CardContent>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
 
           <TabsContent value="consulting" className="mt-6">
             <Card>

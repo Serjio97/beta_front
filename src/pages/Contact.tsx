@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Link as LucideLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 
 const Contact = () => {
@@ -23,6 +24,8 @@ const Contact = () => {
   const [checkboxError, setCheckboxError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -32,13 +35,24 @@ const Contact = () => {
     }));
   };
 
+  const handleCaptchaChange = (token: string | null) => {
+    setCaptchaToken(token);
+    setCaptchaError('');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setCheckboxError('');
+    setCaptchaError('');
     setIsSubmitting(true);
 
     if (!agreePrivacy || !agreeTerms) {
       setCheckboxError('You must agree to the Privacy Policy and Terms of Service.');
+      setIsSubmitting(false);
+      return;
+    }
+    if (!captchaToken) {
+      setCaptchaError('Please complete the CAPTCHA.');
       setIsSubmitting(false);
       return;
     }
@@ -66,7 +80,8 @@ const Contact = () => {
           subject: formData.program || formData.company || 'General Inquiry',
           message: formData.message,
           timestamp: new Date(),
-          status: 'unread'
+          status: 'unread',
+          recaptchaToken: captchaToken,
         }),
       });
 
@@ -290,6 +305,13 @@ const Contact = () => {
                         <Link to="/terms-of-service" className="underline text-primary" target="_blank">Terms of Service</Link>
                       </label>
                       {checkboxError && <div className="text-red-500 text-xs mt-1">{checkboxError}</div>}
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <ReCAPTCHA
+                        sitekey="6LcEaI0rAAAAAB9rhVBjMmUSFxoCb7aDgRn18vfu"
+                        onChange={handleCaptchaChange}
+                      />
+                      {captchaError && <div className="text-red-500 text-xs mt-1">{captchaError}</div>}
                     </div>
                     <Button
                       type="submit"

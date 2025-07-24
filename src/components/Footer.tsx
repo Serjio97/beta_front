@@ -2,23 +2,23 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const siteKey = '6LcEaI0rAAAAAB9rhVBjMmUSFxoCb7aDgRn18vfu';
-
-useEffect(() => {
-  if (!window.grecaptcha) {
-    const script = document.createElement('script');
-    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
-    script.async = true;
-    document.body.appendChild(script);
-  }
-}, []);
-
 const Footer = () => {
 
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [emailError, setEmailError] = useState('');
+
+  const siteKey = '6LcEaI0rAAAAAB9rhVBjMmUSFxoCb7aDgRn18vfu';
+
+  useEffect(() => {
+    if (!window.grecaptcha) {
+      const script = document.createElement('script');
+      script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();

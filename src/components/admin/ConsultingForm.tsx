@@ -86,8 +86,7 @@ const ConsultingForm: React.FC<ConsultingFormProps> = ({ isOpen, onClose, onSubm
                 required
               >
                 <option value="strategy">Strategy</option>
-                <option value="product">Product</option>
-                <option value="marketing">Marketing</option>
+                <option value="program">Program</option>
                 <option value="funding">Funding</option>
               </select>
             </div>

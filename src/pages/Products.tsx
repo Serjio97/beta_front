@@ -94,7 +94,7 @@ const Products = () => {
         <div className="container-width section-padding">
           {/* Filter */}
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">All Products</h2>
+            <h2 className="text-2xl font-bold text-gray-900">All</h2>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">Filter by category:</span>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>

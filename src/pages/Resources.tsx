@@ -104,7 +104,7 @@ const handleDownloadClick = (resource: Resource) => {
         <div className="container-width section-padding">
           {/* Filter */}
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">All Resources</h2>
+            <h2 className="text-2xl font-bold text-gray-900">All</h2>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">Filter by type:</span>
               <Select value={selectedType} onValueChange={setSelectedType}>

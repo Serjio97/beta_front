@@ -50,8 +50,7 @@ const ConsultingPage = () => {
   const categories = [
     { value: 'all', label: 'All Categories' },
     { value: 'strategy', label: 'Strategy' },
-    { value: 'product', label: 'Product' },
-    { value: 'marketing', label: 'Marketing' },
+    { value: 'program', label: 'Program' },
     { value: 'funding', label: 'Funding' }
   ];
 
@@ -85,7 +84,7 @@ const ConsultingPage = () => {
       <section className="py-20">
         <div className="container-width section-padding">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-gray-900">All Consultings</h2>
+            <h2 className="text-2xl font-bold text-gray-900">All</h2>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600">Filter by category:</span>
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
@@ -131,7 +130,7 @@ const ConsultingPage = () => {
       ))}
     </ul>
     <div className="text-sm text-gray-700 mb-4">
-      <strong>Eligibility:</strong> {consulting.eligibility}
+      <strong>Duration:</strong> {consulting.eligibility}
     </div>
   </div>
 
@@ -167,7 +166,7 @@ const ConsultingPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary">
-              <Link to="/contact">Book a session</Link>
+              <Link to="/contact">Contact Us</Link>
             </Button>
             <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto focus:ring-2 focus:ring-white">
               <a href="https://hubs.ly/Q03yCr_T0" target="_blank" rel="noopener noreferrer">

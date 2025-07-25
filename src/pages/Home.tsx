@@ -28,7 +28,7 @@ const Home = () => {
     heroImage: '',
     heroVideoUrl:'https://www.youtube.com/watch?v=hlZu4AMKyds',
     runningTextCompanies: [
-      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Ventuers-Studio', 'Ecosystem-Building', 
+      'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Venture-Studio', 'Ecosystem-Building', 
       'Worldwide-Connections', 'Emerging-Markets'
     ],
     collaborators: [
@@ -148,15 +148,15 @@ const Home = () => {
   },
   {
     id: '20',
-    name: 'Beta',
-    logo: 'https://aspban.eu/portnetworks/wp-content/uploads/2021/11/Beta-i.png',
-    website: 'https://beta-i.com/'
-  },
-  {
-    id: '21',
     name: 'Gitex',
     logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH5MTbHcGnfFOqRrlHTA0e7fktBnhboTBroA&s',
     website: 'https://www.gitexnigeria.ng/'
+  },
+  {
+    id: '21',
+    name: 'Expand North Star',
+    logo: 'https://d2p9i44hnkrmkx.cloudfront.net/public/images/networkmap/northstar_logo.png',
+    website: 'https://www.expandnorthstar.com/'
   }
 ]
   });

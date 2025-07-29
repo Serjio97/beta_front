@@ -132,9 +132,9 @@ const Products = () => {
                     <h4 className="font-semibold text-gray-900 mb-3">Key Features:</h4>
                     <ul className="space-y-2">
                       {product.features.map((feature, index) => (
-                        <li key={index} className="flex items-center text-sm text-gray-600">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3"></div>
-                          {feature}
+                        <li key={index} className="flex items-start text-sm text-gray-600">
+                          <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                          <span className="leading-relaxed">{feature}</span>
                         </li>
                       ))}
                     </ul>

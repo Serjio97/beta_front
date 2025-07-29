@@ -225,10 +225,12 @@ const Home = () => {
               <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
                 Driving Innovation, Investment, and Ecosystem Growth
                 <span className="gradient-text block">In Emerging Markets</span>
+                <br/>
 
               </h1>
               <p className="text-base md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed">
                We provide innovation services, early-stage investment, and ecosystem support across the region. 
+               <br/>
                From building startup programs and advising corporates and governments to co-creating ventures, 
                we help ideas grow and markets connect.
               </p>
@@ -304,7 +306,7 @@ const Home = () => {
               Our Mission
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              At Betawaves, we empower nations and industries to thrive by activating three core forces:
+              At Betawaves, we empower governments and industries to thrive by activating three core forces:
             </p>
           </div>
 
@@ -365,9 +367,9 @@ const Home = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 mb-6">
-                      {service.features.slice(0, 3).map((feature, index) => <li key={index} className="flex items-center text-sm text-gray-600">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3"></div>
-                          {feature}
+                      {service.features.slice(0, 3).map((feature, index) => <li key={index} className="flex items-start text-sm text-gray-600">
+                          <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                          <span className="leading-relaxed">{feature}</span>
                         </li>)}
                     </ul>
                     <div className="space-y-2 text-sm">
@@ -412,9 +414,9 @@ const Home = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 mb-6">
-                      {consulting.features.slice(0, 3).map((feature, index) => <li key={index} className="flex items-center text-sm text-gray-600">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3"></div>
-                          {feature}
+                      {consulting.features.slice(0, 3).map((feature, index) => <li key={index} className="flex items-start text-sm text-gray-600">
+                          <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                          <span className="leading-relaxed">{feature}</span>
                         </li>)}
                     </ul>
                     {/* <div className="space-y-2 text-sm">
@@ -461,9 +463,9 @@ const Home = () => {
       </div> */}
       <ul className="space-y-2 text-sm text-gray-300">
         {product.features.slice(0, 3).map((feature, idx) => (
-          <li key={idx} className="flex items-center">
-            <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3"></div>
-            {feature}
+          <li key={idx} className="flex items-start">
+            <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+            <span className="leading-relaxed">{feature}</span>
           </li>
         ))}
       </ul>

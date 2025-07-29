@@ -427,7 +427,7 @@ const Home = () => {
 
           <div className="text-center mt-12">
             <Button asChild>
-              <Link to="/consultings">View All Consultings</Link>
+              <Link to="/consultings">View All</Link>
             </Button>
           </div>
         </div>
@@ -475,7 +475,7 @@ const Home = () => {
 
           <div className="text-center mt-12">
             <Button asChild variant="secondary">
-              <Link to="/products">View All Products</Link>
+              <Link to="/products">View All</Link>
             </Button>
           </div>
         </div>
@@ -623,7 +623,7 @@ const Home = () => {
 
           <div className="text-center mt-12">
             <Button asChild>
-              <Link to="/case-studies">View All Portfolio</Link>
+              <Link to="/case-studies">View All</Link>
             </Button>
           </div>
         </div>
@@ -665,7 +665,7 @@ const Home = () => {
           </div>
           <div className="text-center mt-12">
             <Button asChild>
-              <Link to="/blog">View All Blog Posts</Link>
+              <Link to="/blog">View All</Link>
             </Button>
           </div>
         </div>

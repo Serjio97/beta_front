@@ -54,7 +54,7 @@ const CaseStudies = () => {
                                     </Link>
                                   </Button>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              <span className="gradient-text">Our</span> Portfolio
+              <span className="gradient-text">Our</span> Stories
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
               Discover how we've helped startups overcome challenges, secure funding, and achieve remarkable growth. 

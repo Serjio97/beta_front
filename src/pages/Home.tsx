@@ -586,7 +586,7 @@ const Home = () => {
         <div className="container-width section-padding">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Portfolio
+              Stories
             </h2>
             <p className="text-xl text-gray-600">
               See how we've helped startups achieve remarkable growth and success

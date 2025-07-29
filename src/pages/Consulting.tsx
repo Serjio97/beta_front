@@ -76,7 +76,7 @@ const ConsultingPage = () => {
             Our <span className="gradient-text">Consulting Services</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Tailored innovation consulting designed to help your startup tackle strategic, product, marketing, or funding challenges.
+            Tailored innovation consulting for startups, corporations, governments, and ecosystem enablers tackling strategic, product, marketing, or funding challenges.          
           </p>
         </div>
       </section>

@@ -26,7 +26,7 @@ const Home = () => {
   const [styleSettings, setStyleSettings] = useState({
     heroType: 'video',
     heroImage: '',
-    heroVideoUrl:'https://www.youtube.com/watch?v=5SGVQMXas_0',
+    heroVideoUrl:'https://44138838.fs1.hubspotusercontent-na1.net/hubfs/44138838/Website%20Content/betawaves%20presentation%202%20(1).mp4',
     runningTextCompanies: [
       'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Venture-Studio', 'Ecosystem-Building', 
       'Worldwide-Connections', 'Emerging-Markets'

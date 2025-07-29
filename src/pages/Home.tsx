@@ -26,7 +26,7 @@ const Home = () => {
   const [styleSettings, setStyleSettings] = useState({
     heroType: 'video',
     heroImage: '',
-    heroVideoUrl:'https://youtu.be/5SGVQMXas_0',
+    heroVideoUrl:'https://www.youtube.com/watch?v=5SGVQMXas_0',
     runningTextCompanies: [
       'Sustainable-Investment', 'Startup-Support', 'Innovation-Consulting', 'Emerging-Tech', 'Venture-Studio', 'Ecosystem-Building', 
       'Worldwide-Connections', 'Emerging-Markets'

@@ -764,7 +764,7 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             <TabsTrigger value="products">Products</TabsTrigger>
             <TabsTrigger value="resources">Resources</TabsTrigger>
             {/* <TabsTrigger value="funds">Funds</TabsTrigger> */}
-            <TabsTrigger value="case-studies">Portfolio</TabsTrigger>
+            <TabsTrigger value="case-studies">Stories</TabsTrigger>
             
             <TabsTrigger value="blog-posts">Blog Posts</TabsTrigger>
             {/* <TabsTrigger value="events">Events</TabsTrigger> */}
@@ -995,10 +995,10 @@ const handleConsultingSubmit = (data: Omit<Consulting, 'id'>) => {
             <Card>
               <CardHeader>
                 <div className="flex justify-between items-center">
-                  <CardTitle>Portfolio Management</CardTitle>
+                  <CardTitle>Stories Management</CardTitle>
                   <Button onClick={() => setIsCaseStudyFormOpen(true)}>
                     <Plus className="w-4 h-4 mr-2" />
-                    Add Portfolio
+                    Add Stories
                   </Button>
                 </div>
               </CardHeader>

@@ -17,7 +17,7 @@ const Navigation = () => {
     { name: 'Products', path: '/products' },
     { name: 'Resources', path: '/resources' },
     { name: 'Investment', path: '/fund' },
-    { name: 'Portfolio', path: '/case-studies' },
+    { name: 'Stories', path: '/case-studies' },
     { name: 'Blog', path: '/blog' },
     // { name: 'Events', path: '/events' },
     // { name: 'Contact', path: '/contact' },

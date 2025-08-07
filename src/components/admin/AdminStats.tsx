@@ -80,7 +80,7 @@ const AdminStats = ({ services, teamMembers, products, funds, messages, caseStud
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm text-gray-600">Portfolio</CardTitle>
+          <CardTitle className="text-sm text-gray-600">Stories</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold text-primary">{caseStudies.length}</div>

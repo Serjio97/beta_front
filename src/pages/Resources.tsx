@@ -89,7 +89,7 @@ const handleDownloadClick = (resource: Resource) => {
               </Link>
             </Button>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              OUR <span className="gradient-text">Resources</span>
+              Our <span className="gradient-text">Resources</span>
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
               Access essential templates, guides, and tools to accelerate your startup journey. 

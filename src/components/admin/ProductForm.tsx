@@ -138,7 +138,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ isOpen, onClose, onSubmit, pr
               value={formData.features}
               onChange={(e) => setFormData(prev => ({ ...prev, features: e.target.value }))}
               placeholder="Feature 1&#10;Feature 2&#10;Feature 3"
-              required
+              
             />
           </div>
           <div className="space-y-2">
